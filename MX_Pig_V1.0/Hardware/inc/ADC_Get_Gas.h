@@ -147,6 +147,9 @@
 #define H2S_COEFFICIENT_0 1964
 #define H2S_DIVISOR       1000
 
+/* Voltage and temperature offset items */
+#define VOLTAGE_OFFSET    4.0
+#define TEMP_OFFSET       -7
 
 /* Gas sensor output voltage and concentration fitting curve default macro function */
 
@@ -180,7 +183,8 @@ float    ADC_Get_Ozone(void);
 float    ADC_Get_CO2(void);
 float    ADC_Get_CO(void);
 float    ADC_Get_H2S(void);
-
+float    ADC_Get_Voltage(void);
+float    ADC_Get_Temp(void);
 
 #ifdef __cplusplus
 }

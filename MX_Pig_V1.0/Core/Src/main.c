@@ -54,6 +54,8 @@
 
 /* USER CODE BEGIN PV */
 extern __IO uint16_t   aADCxConvertedValues[ADCCONVERTEDVALUES_BUFFER_SIZE];
+extern uint8_t         ubSequenceCompleted;
+
 float temp=0;
 /* USER CODE END PV */
 
@@ -112,7 +114,7 @@ int main(void)
   while(1)
   {
       ADC_Get_Gas();
-	  temp=ADC_Get_H2S();
+	  temp=ADC_Get_Voltage();
 	  printf("%.2f",temp);
   }
   /* USER CODE END 2 */
@@ -218,6 +220,8 @@ int32_t BSP_Init(void)
 		ret= (int32_t)OPERATION_ERROR;
 	}
 
+	ubSequenceCompleted = RESET;
+	
 	/* ----------------------------LED Operation------------------------- */
 	/* Led blinks 5 times: BSP initialization is in progress */
 	for(int i=0;i<3;i++)

@@ -55,6 +55,7 @@
 #include "ADC_Get_Gas.h"
 #include "adc.h"
 #include "dma.h"
+
 /* External function declaration----------------------------------------------*/
 
 
@@ -67,12 +68,12 @@
 __IO uint16_t   aADCxConvertedValues[ADCCONVERTEDVALUES_BUFFER_SIZE];
 
 /* Variables for ADC conversions results computation to physical values */
-uint16_t   uhADCChannel_4_ToDAC_mVolt = 0;
-uint16_t   uhADCChannel_6_ToDAC_mVolt = 0;
-uint16_t   uhADCChannel_7_ToDAC_mVolt = 0;
-uint16_t   uhADCChannel_8_ToDAC_mVolt = 0;
-int32_t   wTemperature_DegreeCelsius = 0;
-uint16_t   uhVrefInt_mVolt = 0;
+static uint16_t   uhADCChannel_4_ToDAC_mVolt = 0;
+static uint16_t   uhADCChannel_6_ToDAC_mVolt = 0;
+static uint16_t   uhADCChannel_7_ToDAC_mVolt = 0;
+static uint16_t   uhADCChannel_8_ToDAC_mVolt = 0;
+static int32_t    wTemperature_DegreeCelsius = 0;
+static uint16_t   uhVrefInt_mVolt = 0;
 
 /* Variable to report ADC sequencer status */
 uint8_t         ubSequenceCompleted = RESET;     /* Set when all ranks of the sequence have been converted */
@@ -123,24 +124,32 @@ int32_t ADC_Get_Gas(void)
 
 float ADC_Get_Ozone(void)
 {
-	return (float)OZONE_CONCENTRATION_CAL((float)uhADCChannel_4_ToDAC_mVolt/1000);
+	return (float)(OZONE_CONCENTRATION_CAL((float)uhADCChannel_4_ToDAC_mVolt/1000));
 }
 
 float ADC_Get_CO2(void)
 {
-	return (float)CO2_CONCENTRATION_CAL((float)uhADCChannel_6_ToDAC_mVolt/1000);
+	return (float)(CO2_CONCENTRATION_CAL((float)uhADCChannel_6_ToDAC_mVolt/1000));
 }
 
 float ADC_Get_CO(void)
 {
-	return (float)CO_CONCENTRATION_CAL((float)uhADCChannel_7_ToDAC_mVolt/1000);
+	return (float)(CO_CONCENTRATION_CAL((float)uhADCChannel_7_ToDAC_mVolt/1000));
 }
 
 float ADC_Get_H2S(void)
 {
-	return (float)H2S_CONCENTRATION_CAL((float)uhADCChannel_8_ToDAC_mVolt/1000);
+	return (float)(H2S_CONCENTRATION_CAL((float)uhADCChannel_8_ToDAC_mVolt/1000));
 }
 
+float ADC_Get_Voltage(void)
+{
+	return (float)(uhVrefInt_mVolt)+VOLTAGE_OFFSET;
+}
 
+float ADC_Get_Temp(void)
+{
+	return wTemperature_DegreeCelsius+TEMP_OFFSET;
+}
 
 
