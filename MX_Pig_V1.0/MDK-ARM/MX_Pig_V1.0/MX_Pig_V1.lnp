@@ -38,6 +38,7 @@
 "mx_pig_v1.0\startup_stm32f103xb.o"
 "mx_pig_v1.0\uart_printf.o"
 "mx_pig_v1.0\adc_get_gas.o"
+"mx_pig_v1.0\connect.o"
 --library_type=microlib --strict --scatter "MX_Pig_V1.0\MX_Pig_V1.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

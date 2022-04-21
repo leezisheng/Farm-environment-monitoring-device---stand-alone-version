@@ -33,6 +33,8 @@
 /* Internal reference voltage, temperature, gas concentration header file is obtained via ADC1 */
 #include "ADC_Get_Gas.h"
 
+/* STM32 connect esp8266 by uart1 to send message to IoT Platform */
+#include "Connect.h"
 
 /* USER CODE END Includes */
 
@@ -110,12 +112,6 @@ int main(void)
   if(BSP_Init()!=(int32_t)OPERATION_SUCCESS)
   {
 	  Error_Handler();
-  }
-  while(1)
-  {
-      ADC_Get_Gas();
-	  temp=ADC_Get_Voltage();
-	  printf("%.2f",temp);
   }
   /* USER CODE END 2 */
 
@@ -230,6 +226,7 @@ int32_t BSP_Init(void)
 		HAL_Delay(100);
 	}
   
+	
   
     return ret;
 }
