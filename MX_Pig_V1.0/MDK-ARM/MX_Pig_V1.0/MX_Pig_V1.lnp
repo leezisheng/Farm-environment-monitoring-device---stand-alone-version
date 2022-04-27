@@ -4,6 +4,7 @@
 "mx_pig_v1.0\freertos.o"
 "mx_pig_v1.0\adc.o"
 "mx_pig_v1.0\dma.o"
+"mx_pig_v1.0\tim.o"
 "mx_pig_v1.0\usart.o"
 "mx_pig_v1.0\stm32f1xx_it.o"
 "mx_pig_v1.0\stm32f1xx_hal_msp.o"

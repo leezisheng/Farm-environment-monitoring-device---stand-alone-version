@@ -48,6 +48,7 @@ mx_pig_v1.0\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 mx_pig_v1.0\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 mx_pig_v1.0\main.o: ../Core/Inc/adc.h
 mx_pig_v1.0\main.o: ../Core/Inc/dma.h
+mx_pig_v1.0\main.o: ../Core/Inc/tim.h
 mx_pig_v1.0\main.o: ../Core/Inc/usart.h
 mx_pig_v1.0\main.o: ../Core/Inc/gpio.h
 mx_pig_v1.0\main.o: ..\Hardware\inc\UART_Printf.h

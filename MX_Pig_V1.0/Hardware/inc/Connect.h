@@ -37,7 +37,7 @@
 /* Instruction for setting working mode AT: Set to STA mode */
 #define AT_CWMODE     "AT+CWMODE=1\r\n"
 /* AT command to connect WIFI */
-#define AT_CWJAP      "AT+CWJAP="
+#define AT_CWJAP      "AT+CWJAP_DEF=\"CMCC-y36J\",\"DE3e5SLL\"\r\n"
 /* Setting connection mode AT instruction: Single connection mode */
 #define AT_CIPMUX     "AT+CIPMUX=0\r\n"
 
