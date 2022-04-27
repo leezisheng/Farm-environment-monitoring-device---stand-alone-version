@@ -24,6 +24,7 @@
 #include "dma.h"
 #include "usart.h"
 #include "gpio.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -59,6 +60,7 @@ extern __IO uint16_t   aADCxConvertedValues[ADCCONVERTEDVALUES_BUFFER_SIZE];
 extern uint8_t         ubSequenceCompleted;
 
 float temp=0;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -112,6 +114,12 @@ int main(void)
   if(BSP_Init()!=(int32_t)OPERATION_SUCCESS)
   {
 	  Error_Handler();
+  }
+  
+  while(1)
+  {
+      HAL_Delay(200);
+	  UART1_Transmit_Rx();
   }
   /* USER CODE END 2 */
 
@@ -183,7 +191,7 @@ void SystemClock_Config(void)
 *               include:
 * 				ADC calibration
 *               LED Blink
-*
+*				CMD UART1_IT 
 *
 *
 * @param {void} 
@@ -216,6 +224,7 @@ int32_t BSP_Init(void)
 		ret= (int32_t)OPERATION_ERROR;
 	}
 
+	/* The flag bit reset of ADC1 collection is complete */
 	ubSequenceCompleted = RESET;
 	
 	/* ----------------------------LED Operation------------------------- */
@@ -226,7 +235,17 @@ int32_t BSP_Init(void)
 		HAL_Delay(100);
 	}
   
+	/* ----------------------------UART1 Operation----------------------- */
+	if(Cmd_UART1_IT()!=(uint8_t)OPERATION_SUCCESS)
+	{
+		Error_Handler();
+		ret= (int32_t)OPERATION_ERROR;
+	}
 	
+	/* Serial port 1 interrupt data receiving completion flag bit */
+	Uart1_Rx_Flag = RESET;
+	/* Serial port 1 interrupts receiving flag bit */
+	Uart1Ready = RESET;
   
     return ret;
 }
@@ -257,7 +276,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 /**
   * @brief  This function is executed in case of error occurrence.
-  *         The program is abnormal, the LED lights flash, first for a short time and then for a long time, cycle  
   * @retval None
   */
 void Error_Handler(void)
