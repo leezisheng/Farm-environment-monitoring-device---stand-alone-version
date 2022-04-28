@@ -83,7 +83,7 @@ void MX_FREERTOS_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  
+  int temp = 56;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -120,7 +120,8 @@ int main(void)
   
   while(1)
   {
-
+	  USART1_printf("199: %d",temp);
+      HAL_Delay(500);
   }
   /* USER CODE END 2 */
 
@@ -275,7 +276,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 0 */
   if (htim->Instance == TIM3) 
   {
-	  HAL_GPIO_TogglePin(PB12_GPIO_Port,PB12_Pin);
+	  
   }
   /* USER CODE END Callback 0 */
   if (htim->Instance == TIM1) {

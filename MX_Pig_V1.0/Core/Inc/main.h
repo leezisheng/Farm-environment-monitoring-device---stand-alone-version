@@ -70,8 +70,10 @@ void Error_Handler(void);
 #define USART_RX_GPIO_Port GPIOA
 #define LD2_Pin GPIO_PIN_5
 #define LD2_GPIO_Port GPIOA
-#define PB12_Pin GPIO_PIN_12
-#define PB12_GPIO_Port GPIOB
+#define ESP8266_RST_Pin GPIO_PIN_12
+#define ESP8266_RST_GPIO_Port GPIOB
+#define ESP8266_CH_PD_Pin GPIO_PIN_13
+#define ESP8266_CH_PD_GPIO_Port GPIOB
 #define USART1_TX_Pin GPIO_PIN_9
 #define USART1_TX_GPIO_Port GPIOA
 #define USART1_RX_Pin GPIO_PIN_10

@@ -35,3 +35,5 @@ mx_pig_v1.0\connect.o: ..\Common\numtype.h
 mx_pig_v1.0\connect.o: D:\Lee\MDK5\ARM\ARMCC\Bin\..\include\stdio.h
 mx_pig_v1.0\connect.o: ../Core/Inc/usart.h
 mx_pig_v1.0\connect.o: ../Core/Inc/tim.h
+mx_pig_v1.0\connect.o: D:\Lee\MDK5\ARM\ARMCC\Bin\..\include\stdarg.h
+mx_pig_v1.0\connect.o: D:\Lee\MDK5\ARM\ARMCC\Bin\..\include\string.h
