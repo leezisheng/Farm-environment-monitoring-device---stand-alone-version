@@ -83,7 +83,7 @@ void MX_FREERTOS_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  int temp = 56;
+
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -120,7 +120,6 @@ int main(void)
   
   while(1)
   {
-	  USART1_printf("199: %d",temp);
       HAL_Delay(500);
   }
   /* USER CODE END 2 */
@@ -237,21 +236,9 @@ int32_t BSP_Init(void)
 		HAL_Delay(100);
 	}
   
-	/* ----------------------------UART1 Operation----------------------- */
-	if(Cmd_UART1_IT()!=(uint8_t)OPERATION_SUCCESS)
-	{
-		Error_Handler();
-		ret= (int32_t)OPERATION_ERROR;
-	}
-	
-	/* Serial port 1 interrupt data receiving completion flag bit */
-	UART1_Rx_Flag = RESET;
-	/* Serial port 1 interrupts receiving flag bit */
-	Uart1Ready = RESET;
-	
-	/* ----------------------------TIM3 Operation----------------------- */
-	/* Enable timer 3 to interrupt */
-	if(Cmd_TIM3_IT()!=(uint8_t)OPERATION_SUCCESS)
+	/* ----------------------------ESP8266 Operation----------------------- */
+	/* ESP8266 initialization */
+	if (ESP8266_Init() != (uint8_t)OPERATION_SUCCESS)
 	{
 		Error_Handler();
 		ret= (int32_t)OPERATION_ERROR;
@@ -276,7 +263,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 0 */
   if (htim->Instance == TIM3) 
   {
-	  
+//	  HAL_GPIO_TogglePin(ESP8266_RST_GPIO_Port,ESP8266_RST_Pin);
   }
   /* USER CODE END Callback 0 */
   if (htim->Instance == TIM1) {

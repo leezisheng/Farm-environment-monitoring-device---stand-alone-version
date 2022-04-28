@@ -68,25 +68,16 @@
 /* A macro function that calculates the length of an array */
 #define COUNTOF(__BUFFER__)   (sizeof(__BUFFER__) / sizeof(*(__BUFFER__)))
 
-#define ESP8266_RST_Pin_SetH       HAL_GPIO_WritePin(ESP8266_RST_GPIO_Port, ESP8266_RST_Pin, GPIO_PIN_SET)
-#define ESP8266_RST_Pin_SetL       HAL_GPIO_WritePin(ESP8266_RST_GPIO_Port, ESP8266_RST_Pin, GPIO_PIN_RESET)
+#define ESP8266_RST_Pin_SetH       (HAL_GPIO_WritePin(ESP8266_RST_GPIO_Port, ESP8266_RST_Pin, GPIO_PIN_SET))
+#define ESP8266_RST_Pin_SetL       (HAL_GPIO_WritePin(ESP8266_RST_GPIO_Port, ESP8266_RST_Pin, GPIO_PIN_RESET))
 
 
 #define ESP8266_CH_PD_Pin_SetH     HAL_GPIO_WritePin(ESP8266_CH_PD_GPIO_Port, ESP8266_CH_PD_Pin, GPIO_PIN_SET)
 #define ESP8266_CH_PD_Pin_SetL     HAL_GPIO_WritePin(ESP8266_CH_PD_GPIO_Port, ESP8266_CH_PD_Pin, GPIO_PIN_RESET)
 
+#define ESP8266_USART(fmt, ...)    USART1_printf (fmt, ##__VA_ARGS__) 
   
 /* Extern Variable-------------------------------------------------------------------------------------------------*/
-/* Serial port 1 indicates that receiving is complete */
-extern __IO ITStatus UART1_Rx_Flag;
-/* Serial port 1 indicates that receiving is complete */
-extern __IO ITStatus Uart1Ready;
-/* USART1 stores an array of received data */
-extern uint8_t UART1_Rx_Buf[MAX_REC_LENGTH];
-/* USART1 accepts a data counter */
-extern uint8_t UART1_Rx_cnt;   
-/* USART1 receives the data cache array */
-extern uint8_t UART1_temp[REC_LENGTH];   
 
 
 /* Data structure declaration--------------------------------------------------------------------------------------*/
@@ -134,11 +125,13 @@ extern struct STRUCT_USART_Fram
 
 /* Function declaration--------------------------------------------------------------------------------------------*/
 
-/* Enable serial port interruption */
-uint8_t Cmd_UART1_IT(void);
-
-/* Enable timer 3 to interrupt */
-uint8_t Cmd_TIM3_IT(void);
+/* Initialization and TCP function functions */
+/* ESP8266 restart function */
+uint8_t ESP8266_Rst(void);
+/* ESP8266 initialization */
+uint8_t ESP8266_Init(void);
+/* Send the AT command to the ESP8266 module */
+uint8_t ESP8266_Send_AT_Cmd(char *cmd,char *ack1,char *ack2,uint32_t time);
 																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												
 /* Serial port redirection: Serial port 1 only!! */
 uint8_t USART1_printf(const char* Data, ...);

@@ -35,9 +35,9 @@ typedef void*                   p_void;
 #define TASK_FALSE              0
 #define TASK_ERROR              255
 
-#define OPERATION_SUCCESS            1
-#define OPERATION_FALSE              0
-#define OPERATION_ERROR              255
+#define OPERATION_SUCCESS       1
+#define OPERATION_FALSE         0
+#define OPERATION_ERROR         255
 
 #ifdef __cplusplus
 }
