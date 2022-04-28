@@ -26,28 +26,34 @@
 #endif
 
 /* Serial port 1 macro definitions */
-#define MAX_REC_LENGTH  1024 
+#define MAX_REC_LENGTH         			 1024 
 
 /* WIFI Parameter Setting */
 /* The name of the WIFI  */
-#define WIFI_NAME   "CMCC-y36J"
+#define WIFI_NAME               		"CMCC-y36J"
 /* WIFI password */
-#define WIFI_KEY    "DE3e5SLL"
+#define WIFI_KEY    					"DE3e5SLL"
 
 /* MQTT protocol parameters */
 /* Client ID */
-#define MQTT_User_client_id    "123456"  
+#define MQTT_User_client_id   			"123456"  
 /* Server IP Address */
-#define MQTT_Server_IP     "192.168.31.16"  
+#define MQTT_Server_IP     				"192.168.31.16"  
 /* Server port number */
-#define MQTT_Server_PORT   1883    
+#define MQTT_Server_PORT   				1883    
 /* Subscribe topic */
-#define MQTT_Server_Topic  "topic"    
+#define MQTT_Server_Topic  				"topic"    
+
+/* TCP protocol Parameters */
+/* Server IP Address */
+#define User_ESP8266_TCPServer_IP		"192.168.31.16" 
+/* Server port number */
+#define User_ESP8266_TCPServer_PORT   	"8888" 
 
 /* The equipment parameters:Device triad */
-#define DEVICE_NAME       "123456"  
-#define DEVICE_SECRET     "123456"
-#define PRODUCT_KEY "a1NRzHXlTTp"
+#define DEVICE_NAME      				 "123456"  
+#define DEVICE_SECRET     				"123456"
+#define PRODUCT_KEY 					"a1NRzHXlTTp"
 
 /* AT instruction macro definition*/
 
@@ -65,7 +71,7 @@
 /* Macro defined function-------------------------------------------------------------------------------------------*/
 
 /* A macro function that calculates the length of an array */
-#define COUNTOF(__BUFFER__)   (sizeof(__BUFFER__) / sizeof(*(__BUFFER__)))
+#define COUNTOF(__BUFFER__)   		(sizeof(__BUFFER__) / sizeof(*(__BUFFER__)))
 
 #define ESP8266_RST_Pin_SetH       (HAL_GPIO_WritePin(ESP8266_RST_GPIO_Port, ESP8266_RST_Pin, GPIO_PIN_SET))
 #define ESP8266_RST_Pin_SetL       (HAL_GPIO_WritePin(ESP8266_RST_GPIO_Port, ESP8266_RST_Pin, GPIO_PIN_RESET))
@@ -132,6 +138,15 @@ uint8_t ESP8266_Rst(void);
 uint8_t ESP8266_Init(void);
 /* Send the AT command to the ESP8266 module */
 uint8_t ESP8266_Send_AT_Cmd(char *cmd,char *ack1,char *ack2,uint32_t time);
+/* Send AT command to restore factory Settings and erase the saved parameters */
+uint8_t ESP8266_AT_RESTORE(void);
+/* Select the ESP8266 working mode */
+uint8_t ESP8266_Net_Mode_Choose(ENUM_Net_ModeTypeDef enumMode);
+/* Connect to external WIFI  */
+uint8_t ESP8266_JoinAP( char * pSSID, char * pPassWord);
+/* Whether to use multi-link mode in transparent transport  */
+uint8_t ESP8266_Enable_MultipleId (FunctionalState enumEnUnvarnishTx );
+
 																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												
 /* Serial port redirection: Serial port 1 only!! */
 uint8_t USART1_printf(const char* Data, ...);

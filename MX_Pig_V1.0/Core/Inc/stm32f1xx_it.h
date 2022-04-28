@@ -28,7 +28,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-  #include "numtype.h"
+#include "numtype.h"
+#include "Connect.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

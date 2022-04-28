@@ -25,12 +25,12 @@
 
 /* Static function declaration---------------------------------------------------------------------------------------------------*/
 static char *itoa( int value, char *string, int radix );
-
+static uint8_t Cmd_UART1_IT(void);
+static uint8_t Cmd_TIM3_IT(void);
 
 
 
 /* Private macro definitions----------------------------------------------------------------------------------------------------*/
-
 
 
 
@@ -41,10 +41,6 @@ static char *itoa( int value, char *string, int radix );
 struct STRUCT_USART_Fram ESP8266_Fram_Record_Struct = { 0 };
 /* Serial port receiving area, data cache */
 uint8_t RxBuffer=0; 
-
-/* Static function definition---------------------------------------------------------------------------------------------------*/
-static uint8_t Cmd_UART1_IT(void);
-static uint8_t Cmd_TIM3_IT(void);
 
 
 /* Function definition----------------------------------------------------------------------------------------------------------*/
@@ -148,6 +144,110 @@ uint8_t ESP8266_Send_AT_Cmd(char *cmd,char *ack1,char *ack2,uint32_t time)
 	return ret;
 }
 
+/** 
+* @description: Send AT command to restore factory Settings and erase the saved parameters
+* @param {void}
+* @return {uint8_t}:if success,return (uint8_t)OPERATION_SUCCESS
+* @author: leeqingshui 
+*/
+uint8_t ESP8266_AT_RESTORE(void)
+{
+	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
+	
+    char count=0;
+    HAL_Delay(1000); 
+    while(count < 10)
+    {
+        if(ESP8266_Send_AT_Cmd("AT+RESTORE","OK",NULL,500)) 
+        {
+            printf("RESTORE OK\r\n");
+            return ret;
+        }
+        ++ count;
+		ret = (uint8_t)OPERATION_FALSE;
+    }
+	return ret;
+}
+
+/** 
+* @description: Select the ESP8266 working mode
+* @param {ENUM_Net_ModeTypeDef} enumMode : ESP8266 working mode
+*        STA       : Station (client mode) : similar to mobile phones, small ai audio and other devices (Client)  
+*        AP        : AP (Access point mode) : Similar to a router (server), AP can be accessed by other devices  
+*		 STA_AP    : Station +AP (Client +AP mode)
+* @return {uint8_t}:if success,return (uint8_t)OPERATION_SUCCESS
+* @author: leeqingshui 
+*/
+
+uint8_t ESP8266_Net_Mode_Choose(ENUM_Net_ModeTypeDef enumMode)
+{
+    switch ( enumMode )
+    {
+        case STA:
+            return ESP8266_Send_AT_Cmd ( "AT+CWMODE=1", "OK", "no change", 2500 ); 
+
+        case AP:
+            return ESP8266_Send_AT_Cmd ( "AT+CWMODE=2", "OK", "no change", 2500 ); 
+
+        case STA_AP:
+            return ESP8266_Send_AT_Cmd ( "AT+CWMODE=3", "OK", "no change", 2500 ); 
+
+        default:
+           return (uint8_t)OPERATION_FALSE;
+    }       
+}
+
+/** 
+* @description: Connect to external WIFI  
+* @param {char *} pSSID     : WIFI name
+* @param {char *} pPassWord : WIFI key
+* @return {uint8_t}:if success,return (uint8_t)OPERATION_SUCCESS
+* @author: leeqingshui 
+*/
+uint8_t ESP8266_JoinAP( char * pSSID, char * pPassWord)
+{
+    char cCmd [120];
+	/*
+	Sprintf is almost the same as printf in usage, except that it is printed to a different destination. 
+	The former is printed to a string, while the latter is printed directly on the command line  
+	
+	Sprintf is a variable parameter function defined as follows:
+		int sprintf( char *buffer, const char *format [, argument] … );
+	
+	Printf and sprintf both use format strings to specify the format of the string, use format descriptors starting with % to 
+	occupy a space inside the format string, and provide corresponding variables in the following argument list.  
+	Eventually the function replaces the specifier with a variable at the corresponding position, producing the desired string.  
+	
+	Sprintf are often used to : 
+	1. Formatted numeric string:
+		One of the most common uses of Sprintf is to print integers into strings, 
+		so spritNF can replace ITOA (converting an integer toa string) in most cases.
+	2. Controls the printing format of floating-point numbers
+	3. Connection string
+	
+	*/
+    sprintf ( cCmd, "AT+CWJAP=\"%s\",\"%s\"", pSSID, pPassWord );
+    return ESP8266_Send_AT_Cmd( cCmd, "OK", NULL, 5000 );
+}
+
+/** 
+* @description: Whether to use multi-link mode in transparent transport
+* @param {FunctionalState} enumEnUnvarnishTx : Whether to use multi-link mode , DISABLE or ENABLE
+* @return {uint8_t}:if success,return (uint8_t)OPERATION_SUCCESS
+* @author: leeqingshui 
+*/
+uint8_t ESP8266_Enable_MultipleId (FunctionalState enumEnUnvarnishTx )
+{
+    char cStr [20];
+
+    sprintf ( cStr, "AT+CIPMUX=%d", ( enumEnUnvarnishTx ? 1 : 0 ) );
+
+    return ESP8266_Send_AT_Cmd ( cStr, "OK", 0, 500 );
+}
+
+
+
+
 
 /** 
 * @description: Enable serial port interruption
@@ -165,6 +265,7 @@ static uint8_t Cmd_TIM3_IT(void)
 	
     return ret;
 }
+
 
 /** 
 * @description: Enable serial port 1 IT to receive messages:
