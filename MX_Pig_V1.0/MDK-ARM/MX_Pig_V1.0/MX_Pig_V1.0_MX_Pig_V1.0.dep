@@ -1,6 +1,6 @@
 Dependencies for Project 'MX_Pig_V1.0', Target 'MX_Pig_V1.0': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
-F (../Core/Src/main.c)(0x626AD032)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\Common -I ..\Hardware\inc-I.\RTE\_MX_Pig_V1.0-ID:\Lee\MDK5\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Lee\MDK5\Keil\STM32F1xx_DFP\1.0.5\Device\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o mx_pig_v1.0\main.o --omf_browse mx_pig_v1.0\main.crf --depend mx_pig_v1.0\main.d)
+F (../Core/Src/main.c)(0x626AFD18)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\Common -I ..\Hardware\inc-I.\RTE\_MX_Pig_V1.0-ID:\Lee\MDK5\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Lee\MDK5\Keil\STM32F1xx_DFP\1.0.5\Device\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o mx_pig_v1.0\main.o --omf_browse mx_pig_v1.0\main.crf --depend mx_pig_v1.0\main.d)
 I (../Core/Inc/main.h)(0x626A71D0)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x62567938)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x626A71D0)
@@ -54,7 +54,7 @@ I (../Core/Inc/usart.h)(0x626A71CF)
 I (../Core/Inc/gpio.h)(0x626A71CE)
 I (..\Hardware\inc\UART_Printf.h)(0x626AAE1C)
 I (..\Hardware\inc\ADC_Get_Gas.h)(0x625FD990)
-I (..\Hardware\inc\Connect.h)(0x626AE0E0)
+I (..\Hardware\inc\Connect.h)(0x626AF2FF)
 F (../Core/Src/gpio.c)(0x626A71CE)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\Common -I ..\Hardware\inc-I.\RTE\_MX_Pig_V1.0-ID:\Lee\MDK5\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Lee\MDK5\Keil\STM32F1xx_DFP\1.0.5\Device\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o mx_pig_v1.0\gpio.o --omf_browse mx_pig_v1.0\gpio.crf --depend mx_pig_v1.0\gpio.d)
 I (../Core/Inc/gpio.h)(0x626A71CE)
 I (../Core/Inc/main.h)(0x626A71D0)
@@ -272,7 +272,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x62567938)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x62567938)
 I (..\Common\numtype.h)(0x626ADACA)
 I (D:\Lee\MDK5\ARM\ARMCC\include\stdio.h)(0x60252374)
-F (../Core/Src/stm32f1xx_it.c)(0x626A71CF)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\Common -I ..\Hardware\inc-I.\RTE\_MX_Pig_V1.0-ID:\Lee\MDK5\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Lee\MDK5\Keil\STM32F1xx_DFP\1.0.5\Device\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o mx_pig_v1.0\stm32f1xx_it.o --omf_browse mx_pig_v1.0\stm32f1xx_it.crf --depend mx_pig_v1.0\stm32f1xx_it.d)
+F (../Core/Src/stm32f1xx_it.c)(0x626B028F)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\Common -I ..\Hardware\inc-I.\RTE\_MX_Pig_V1.0-ID:\Lee\MDK5\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Lee\MDK5\Keil\STM32F1xx_DFP\1.0.5\Device\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o mx_pig_v1.0\stm32f1xx_it.o --omf_browse mx_pig_v1.0\stm32f1xx_it.crf --depend mx_pig_v1.0\stm32f1xx_it.d)
 I (../Core/Inc/main.h)(0x626A71D0)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x62567938)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x626A71D0)
@@ -305,7 +305,8 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x62567938)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x62567938)
 I (..\Common\numtype.h)(0x626ADACA)
 I (D:\Lee\MDK5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (../Core/Inc/stm32f1xx_it.h)(0x626A71CF)
+I (../Core/Inc/stm32f1xx_it.h)(0x626B01E7)
+I (..\Hardware\inc\Connect.h)(0x626AF2FF)
 F (../Core/Src/stm32f1xx_hal_msp.c)(0x626A71CF)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\Common -I ..\Hardware\inc-I.\RTE\_MX_Pig_V1.0-ID:\Lee\MDK5\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Lee\MDK5\Keil\STM32F1xx_DFP\1.0.5\Device\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o mx_pig_v1.0\stm32f1xx_hal_msp.o --omf_browse mx_pig_v1.0\stm32f1xx_hal_msp.crf --depend mx_pig_v1.0\stm32f1xx_hal_msp.d)
 I (../Core/Inc/main.h)(0x626A71D0)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x62567938)
@@ -1096,8 +1097,8 @@ I (..\Common\numtype.h)(0x626ADACA)
 I (D:\Lee\MDK5\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (../Core/Inc/adc.h)(0x626A71CF)
 I (../Core/Inc/dma.h)(0x626A71CF)
-F (..\Hardware\src\Connect_ESP8266\Connect.c)(0x626AE189)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\Common -I ..\Hardware\inc-I.\RTE\_MX_Pig_V1.0-ID:\Lee\MDK5\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Lee\MDK5\Keil\STM32F1xx_DFP\1.0.5\Device\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o mx_pig_v1.0\connect.o --omf_browse mx_pig_v1.0\connect.crf --depend mx_pig_v1.0\connect.d)
-I (..\Hardware\inc\Connect.h)(0x626AE0E0)
+F (..\Hardware\src\Connect_ESP8266\Connect.c)(0x626B01E7)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\Common -I ..\Hardware\inc-I.\RTE\_MX_Pig_V1.0-ID:\Lee\MDK5\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Lee\MDK5\Keil\STM32F1xx_DFP\1.0.5\Device\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o mx_pig_v1.0\connect.o --omf_browse mx_pig_v1.0\connect.crf --depend mx_pig_v1.0\connect.d)
+I (..\Hardware\inc\Connect.h)(0x626AF2FF)
 I (../Core/Inc/main.h)(0x626A71D0)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x62567938)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x626A71D0)

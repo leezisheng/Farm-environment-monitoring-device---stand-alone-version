@@ -26,7 +26,6 @@
 #endif
 
 /* Serial port 1 macro definitions */
-#define REC_LENGTH  1
 #define MAX_REC_LENGTH  1024 
 
 /* WIFI Parameter Setting */
@@ -78,7 +77,8 @@
 #define ESP8266_USART(fmt, ...)    USART1_printf (fmt, ##__VA_ARGS__) 
   
 /* Extern Variable-------------------------------------------------------------------------------------------------*/
-
+/* Serial port receiving area, data cache */
+extern uint8_t RxBuffer; 
 
 /* Data structure declaration--------------------------------------------------------------------------------------*/
 /* Enumeration of esp8266 working modes */
@@ -136,6 +136,7 @@ uint8_t ESP8266_Send_AT_Cmd(char *cmd,char *ack1,char *ack2,uint32_t time);
 /* Serial port redirection: Serial port 1 only!! */
 uint8_t USART1_printf(const char* Data, ...);
 
+extern void USART1_IRQHandler_Changed(void);
 
 #ifdef __cplusplus
 }

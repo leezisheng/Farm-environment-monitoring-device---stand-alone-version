@@ -121,6 +121,7 @@ int main(void)
   while(1)
   {
       HAL_Delay(500);
+	  ESP8266_Send_AT_Cmd("AT","OK",NULL,1000);
   }
   /* USER CODE END 2 */
 

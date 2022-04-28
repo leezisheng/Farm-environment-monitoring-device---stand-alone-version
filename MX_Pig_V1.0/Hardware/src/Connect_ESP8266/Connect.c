@@ -20,6 +20,7 @@
 /* External function declaration-------------------------------------------------------------------------------------------------*/
 
 
+/* External variable-------------------------------------------------------------------------------------------------------------*/
 
 
 /* Static function declaration---------------------------------------------------------------------------------------------------*/
@@ -38,6 +39,8 @@ static char *itoa( int value, char *string, int radix );
 /* -------------Receive and send data related------------------ */ 
 /* Data frame structure */
 struct STRUCT_USART_Fram ESP8266_Fram_Record_Struct = { 0 };
+/* Serial port receiving area, data cache */
+uint8_t RxBuffer=0; 
 
 /* Static function definition---------------------------------------------------------------------------------------------------*/
 static uint8_t Cmd_UART1_IT(void);
@@ -108,6 +111,8 @@ uint8_t ESP8266_Send_AT_Cmd(char *cmd,char *ack1,char *ack2,uint32_t time)
     uint8_t ret = (uint8_t)OPERATION_SUCCESS;
 	// Receives new packets again
 	ESP8266_Fram_Record_Struct .InfBit .FramLength = 0;
+	ESP8266_Fram_Record_Struct .InfBit .FramFinishFlag = 0;
+	
     if(ESP8266_USART("%s\r\n", cmd)!=(uint8_t)OPERATION_SUCCESS)
 	{
 		ret = (uint8_t)OPERATION_ERROR;
@@ -162,16 +167,26 @@ static uint8_t Cmd_TIM3_IT(void)
 }
 
 /** 
-* @description: Enable serial port 1 to receive messages
+* @description: Enable serial port 1 IT to receive messages:
+*				1. Enable serial port receive interrupt
+*				2. Enable serial port idle interrupt
 * @param {void} 
 * @return {int} ret: cmd uart1_it success , return OPERATION_SUCCESS
 * @author: leeqingshui 
 */
 static uint8_t Cmd_UART1_IT(void)
 {
-	int x;
-	UNUSED(x);
-	return (uint8_t)OPERATION_SUCCESS;
+	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
+	/* Enable serial port receive interrupt, generated once every received byte */
+	if(HAL_UART_Receive_IT(&huart1,&RxBuffer,1)!=HAL_OK)
+	{
+		ret = (uint8_t)OPERATION_ERROR;
+	}
+	
+	/* Enable serial port idle interrupt, generated once every data frame received */
+	__HAL_UART_ENABLE_IT(&huart1,UART_IT_IDLE); 
+	
+	return ret;
 }
 
 /** 
@@ -397,9 +412,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   if(huart->Instance==USART1)
   {
 
-	  
   }
 }
+
+
 
 
 

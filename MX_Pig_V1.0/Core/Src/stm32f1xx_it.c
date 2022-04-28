@@ -23,6 +23,7 @@
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "Connect.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -63,7 +64,8 @@ extern UART_HandleTypeDef huart1;
 extern TIM_HandleTypeDef htim1;
 
 /* USER CODE BEGIN EV */
-
+extern struct STRUCT_USART_Fram ESP8266_Fram_Record_Struct;
+extern uint8_t RxBuffer; 
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -226,11 +228,34 @@ void TIM3_IRQHandler(void)
 void USART1_IRQHandler(void)
 {
   /* USER CODE BEGIN USART1_IRQn 0 */
+	
+  if(__HAL_UART_GET_FLAG(&huart1,UART_FLAG_RXNE) != RESET)
+  {
+		// 该函数会清空中断标志，取消中断使能，并间接调用回调函数,清除接收标志
+	    HAL_UART_IRQHandler(&huart1);
 
+	  	// 收到数据，将其放入缓冲区
+		if(ESP8266_Fram_Record_Struct.InfBit .FramLength < ( MAX_REC_LENGTH - 1 ) ) 
+		{
+			ESP8266_Fram_Record_Struct.Data_RX_BUF[ ESP8266_Fram_Record_Struct.InfBit.FramLength ++ ]  = RxBuffer;   
+		}  
+  }	
+  if(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE) != RESET)
+  {
+		//清空中断标志（否则会一直不断进入中断）
+         __HAL_UART_CLEAR_IDLEFLAG(&huart1);   
+	  
+	    ESP8266_Fram_Record_Struct .InfBit .FramFinishFlag = 1;
+	  
+	    // TcpClosedFlag = strstr ( ESP8266_Fram_Record_Struct .Data_RX_BUF, "CLOSED\r\n" ) ? 1 : 0;
+		
+  }
+  
+  HAL_UART_Receive_IT(&huart1,&RxBuffer,1);   // 重新使能接收中断
   /* USER CODE END USART1_IRQn 0 */
-  HAL_UART_IRQHandler(&huart1);
+  
   /* USER CODE BEGIN USART1_IRQn 1 */
-
+    
   /* USER CODE END USART1_IRQn 1 */
 }
 

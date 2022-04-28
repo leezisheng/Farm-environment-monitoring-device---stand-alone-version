@@ -33,3 +33,4 @@ mx_pig_v1.0\stm32f1xx_it.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_ua
 mx_pig_v1.0\stm32f1xx_it.o: ..\Common\numtype.h
 mx_pig_v1.0\stm32f1xx_it.o: D:\Lee\MDK5\ARM\ARMCC\Bin\..\include\stdio.h
 mx_pig_v1.0\stm32f1xx_it.o: ../Core/Inc/stm32f1xx_it.h
+mx_pig_v1.0\stm32f1xx_it.o: ..\Hardware\inc\Connect.h
