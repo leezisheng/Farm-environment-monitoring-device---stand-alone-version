@@ -54,7 +54,7 @@
   
 /* Extern Variable------------------------------------------------------------*/
 /* Serial port 1 indicates that receiving is complete */
-extern __IO ITStatus Uart1_Rx_Flag;
+extern __IO ITStatus UART1_Rx_Flag;
 /* Serial port 1 indicates that receiving is complete */
 extern __IO ITStatus Uart1Ready;
 /* USART1 stores an array of received data */
@@ -77,6 +77,8 @@ uint8_t Cmd_UART1_IT(void);
 	flags are restored to their original state.   
 */
 uint8_t UART1_Transmit_Rx(void);
+/* Enable timer 3 to interrupt */
+uint8_t Cmd_TIM3_IT(void);
 
 #ifdef __cplusplus
 }

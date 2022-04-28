@@ -8,7 +8,7 @@
  /* Includes ------------------------------------------------------------------*/
 #include "Connect.h"
 #include "usart.h"
- 
+#include "tim.h"
 /* External function declaration----------------------------------------------*/
 
 
@@ -19,7 +19,7 @@
 
 /* -------------Serial port 1 related variables---------------- */ 
 /* Serial port 1 indicates that receiving is complete */
-__IO ITStatus Uart1_Rx_Flag = RESET;
+__IO ITStatus UART1_Rx_Flag = RESET;
 /* Serial port 1 interrupts receiving flag bit */
 __IO ITStatus Uart1Ready = RESET;
 /* USART1 stores an array of received data */
@@ -66,7 +66,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	/* 0xa == \n, newline character */
     if(0x0a == UART1_temp[0])
     {
-      Uart1_Rx_Flag = SET;
+      UART1_Rx_Flag = SET;
     }
     HAL_UART_Receive_IT(&huart1,(uint8_t *)UART1_temp,REC_LENGTH);
   }
@@ -83,7 +83,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 uint8_t UART1_Transmit_Rx(void)
 {
 	uint8_t ret = (uint8_t)OPERATION_FALSE;
-	if(Uart1_Rx_Flag)
+	if(UART1_Rx_Flag)
     {
 	  /* Send Received data */
       HAL_UART_Transmit(&huart1,UART1_Rx_Buf,UART1_Rx_cnt,0x10);    
@@ -93,15 +93,31 @@ uint8_t UART1_Transmit_Rx(void)
 	  {
 		UART1_Rx_Buf[i] = 0;
 	  }
-      UART1_Rx_cnt = 0;
-      Uart1_Rx_Flag = 0;
 	  
+      UART1_Rx_cnt = 0;
+      UART1_Rx_Flag = RESET;
 	  
 	  ret = (uint8_t)OPERATION_SUCCESS;
     }   
 	return ret;
 }
 
- 
+/** 
+* @description: Enable serial port interruption
+* @param {void} 
+* @return {uint8_t}:if success,return (uint8_t)OPERATION_SUCCESS
+* @author: leeqingshui 
+*/
+uint8_t Cmd_TIM3_IT(void)
+{
+	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
+	if(HAL_TIM_Base_Start_IT(&htim3)!=HAL_OK)
+    {
+		ret = (uint8_t)OPERATION_ERROR;
+	}
+    return ret;
+}
+
+
  
 

@@ -120,8 +120,7 @@ int main(void)
   
   while(1)
   {
-      HAL_Delay(200);
-	  UART1_Transmit_Rx();
+
   }
   /* USER CODE END 2 */
 
@@ -245,9 +244,17 @@ int32_t BSP_Init(void)
 	}
 	
 	/* Serial port 1 interrupt data receiving completion flag bit */
-	Uart1_Rx_Flag = RESET;
+	UART1_Rx_Flag = RESET;
 	/* Serial port 1 interrupts receiving flag bit */
 	Uart1Ready = RESET;
+	
+	/* ----------------------------TIM3 Operation----------------------- */
+	/* Enable timer 3 to interrupt */
+	if(Cmd_TIM3_IT()!=(uint8_t)OPERATION_SUCCESS)
+	{
+		Error_Handler();
+		ret= (int32_t)OPERATION_ERROR;
+	}
   
     return ret;
 }
@@ -266,12 +273,16 @@ int32_t BSP_Init(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   /* USER CODE BEGIN Callback 0 */
-
+  if (htim->Instance == TIM3) 
+  {
+	  HAL_GPIO_TogglePin(PB12_GPIO_Port,PB12_Pin);
+  }
   /* USER CODE END Callback 0 */
   if (htim->Instance == TIM1) {
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
+  
 
   /* USER CODE END Callback 1 */
 }
