@@ -80,8 +80,12 @@
 #define ESP8266_CH_PD_Pin_SetH     HAL_GPIO_WritePin(ESP8266_CH_PD_GPIO_Port, ESP8266_CH_PD_Pin, GPIO_PIN_SET)
 #define ESP8266_CH_PD_Pin_SetL     HAL_GPIO_WritePin(ESP8266_CH_PD_GPIO_Port, ESP8266_CH_PD_Pin, GPIO_PIN_RESET)
 
+/* The macro implementation of C language in the default parameter*/
 #define ESP8266_USART(fmt, ...)    USART1_printf (fmt, ##__VA_ARGS__) 
   
+/* The macro implementation of C language in the default parameter*/
+
+
 /* Extern Variable-------------------------------------------------------------------------------------------------*/
 /* Serial port receiving area, data cache */
 extern uint8_t RxBuffer; 
@@ -132,6 +136,7 @@ extern struct STRUCT_USART_Fram
 /* Function declaration--------------------------------------------------------------------------------------------*/
 
 /* Initialization and TCP function functions */
+
 /* ESP8266 restart function */
 uint8_t ESP8266_Rst(void);
 /* ESP8266 initialization */
@@ -146,12 +151,37 @@ uint8_t ESP8266_Net_Mode_Choose(ENUM_Net_ModeTypeDef enumMode);
 uint8_t ESP8266_JoinAP( char * pSSID, char * pPassWord);
 /* Whether to use multi-link mode in transparent transport  */
 uint8_t ESP8266_Enable_MultipleId (FunctionalState enumEnUnvarnishTx );
+/* The ESP8266 connects to the server over TCP or UDP */
+uint8_t ESP8266_Link_Server(ENUM_NetPro_TypeDef enumE, char * ip, char * ComNum, ENUM_ID_NO_TypeDef id);
+/* The transparent transmission function was enabled */
+uint8_t ESP8266_UnvarnishSend (void);
+/* Controls ESP8266 to send strings */
+uint8_t ESP8266_SendString(FunctionalState enumEnUnvarnishTx, char * pStr, uint32_t ulStrLength, ENUM_ID_NO_TypeDef ucId );
+/* ESP8266 exits transparent transmission mode */
+uint8_t ESP8266_ExitUnvarnishSend ( void );
+/* The ESP8266 detects the network connection status */
+uint8_t ESP8266_Get_LinkStatus ( void );
 
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												
+/* Functions related to the MQTT instruction */
+
+/* MQTT configures user attributes */
+uint8_t ESP8266_MQTTUSERCFG( char * pClient_Id, char * pUserName,char * PassWord);
+/* Connect to the specified MQTT server */
+uint8_t ESP8266_MQTTCONN( char * Ip, uint32_t Num);
+/* Subscribe to MQTT topics that are specified for connection */
+uint8_t ESP8266_MQTTSUB(char * Topic);
+/* Publish data on LinkID via topic, where data is a string message */
+uint8_t ESP8266_MQTTPUB( char * Topic,char *temp);
+/* Close the connection of the MQTT Client to LinkID and release the internal resources */
+uint8_t ESP8266_MQTTCLEAN(void);
+/* ESP8266 Sends a character string */
+uint8_t MQTT_SendString(char * pTopic,char *temp);
+
+/* Configuration functions related to the development board */			
+
 /* Serial port redirection: Serial port 1 only!! */
 uint8_t USART1_printf(const char* Data, ...);
 
-extern void USART1_IRQHandler_Changed(void);
 
 #ifdef __cplusplus
 }

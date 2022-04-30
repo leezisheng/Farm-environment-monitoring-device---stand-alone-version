@@ -1015,6 +1015,11 @@ Section Cross References
     connect.o(i.ESP8266_AT_RESTORE) refers to printf3.o(i.__0printf$3) for __2printf
     connect.o(i.ESP8266_Enable_MultipleId) refers to printf3.o(i.__0sprintf$3) for __2sprintf
     connect.o(i.ESP8266_Enable_MultipleId) refers to connect.o(i.ESP8266_Send_AT_Cmd) for ESP8266_Send_AT_Cmd
+    connect.o(i.ESP8266_ExitUnvarnishSend) refers to stm32f1xx_hal.o(i.HAL_Delay) for HAL_Delay
+    connect.o(i.ESP8266_ExitUnvarnishSend) refers to connect.o(i.USART1_printf) for USART1_printf
+    connect.o(i.ESP8266_Get_LinkStatus) refers to connect.o(i.ESP8266_Send_AT_Cmd) for ESP8266_Send_AT_Cmd
+    connect.o(i.ESP8266_Get_LinkStatus) refers to strstr.o(.text) for strstr
+    connect.o(i.ESP8266_Get_LinkStatus) refers to connect.o(.bss) for .bss
     connect.o(i.ESP8266_Init) refers to connect.o(i.ESP8266_Rst) for ESP8266_Rst
     connect.o(i.ESP8266_Init) refers to stm32f1xx_hal_tim.o(i.HAL_TIM_Base_Start_IT) for HAL_TIM_Base_Start_IT
     connect.o(i.ESP8266_Init) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Receive_IT) for HAL_UART_Receive_IT
@@ -1023,14 +1028,33 @@ Section Cross References
     connect.o(i.ESP8266_Init) refers to usart.o(.bss) for huart1
     connect.o(i.ESP8266_JoinAP) refers to printf3.o(i.__0sprintf$3) for __2sprintf
     connect.o(i.ESP8266_JoinAP) refers to connect.o(i.ESP8266_Send_AT_Cmd) for ESP8266_Send_AT_Cmd
+    connect.o(i.ESP8266_Link_Server) refers to memseta.o(.text) for __aeabi_memclr4
+    connect.o(i.ESP8266_Link_Server) refers to printf3.o(i.__0sprintf$3) for __2sprintf
+    connect.o(i.ESP8266_Link_Server) refers to connect.o(i.ESP8266_Send_AT_Cmd) for ESP8266_Send_AT_Cmd
+    connect.o(i.ESP8266_MQTTCLEAN) refers to printf3.o(i.__0sprintf$3) for __2sprintf
+    connect.o(i.ESP8266_MQTTCLEAN) refers to connect.o(i.ESP8266_Send_AT_Cmd) for ESP8266_Send_AT_Cmd
+    connect.o(i.ESP8266_MQTTCONN) refers to printf3.o(i.__0sprintf$3) for __2sprintf
+    connect.o(i.ESP8266_MQTTCONN) refers to connect.o(i.ESP8266_Send_AT_Cmd) for ESP8266_Send_AT_Cmd
+    connect.o(i.ESP8266_MQTTPUB) refers to printf3.o(i.__0sprintf$3) for __2sprintf
+    connect.o(i.ESP8266_MQTTPUB) refers to connect.o(i.ESP8266_Send_AT_Cmd) for ESP8266_Send_AT_Cmd
+    connect.o(i.ESP8266_MQTTSUB) refers to printf3.o(i.__0sprintf$3) for __2sprintf
+    connect.o(i.ESP8266_MQTTSUB) refers to connect.o(i.ESP8266_Send_AT_Cmd) for ESP8266_Send_AT_Cmd
+    connect.o(i.ESP8266_MQTTUSERCFG) refers to printf3.o(i.__0sprintf$3) for __2sprintf
+    connect.o(i.ESP8266_MQTTUSERCFG) refers to connect.o(i.ESP8266_Send_AT_Cmd) for ESP8266_Send_AT_Cmd
     connect.o(i.ESP8266_Net_Mode_Choose) refers to connect.o(i.ESP8266_Send_AT_Cmd) for ESP8266_Send_AT_Cmd
     connect.o(i.ESP8266_Rst) refers to stm32f1xx_hal_gpio.o(i.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
     connect.o(i.ESP8266_Rst) refers to stm32f1xx_hal.o(i.HAL_Delay) for HAL_Delay
+    connect.o(i.ESP8266_SendString) refers to printf3.o(i.__0sprintf$3) for __2sprintf
+    connect.o(i.ESP8266_SendString) refers to connect.o(i.USART1_printf) for USART1_printf
+    connect.o(i.ESP8266_SendString) refers to connect.o(i.ESP8266_Send_AT_Cmd) for ESP8266_Send_AT_Cmd
     connect.o(i.ESP8266_Send_AT_Cmd) refers to connect.o(i.USART1_printf) for USART1_printf
     connect.o(i.ESP8266_Send_AT_Cmd) refers to stm32f1xx_hal.o(i.HAL_Delay) for HAL_Delay
     connect.o(i.ESP8266_Send_AT_Cmd) refers to printf3.o(i.__0printf$3) for __2printf
     connect.o(i.ESP8266_Send_AT_Cmd) refers to strstr.o(.text) for strstr
     connect.o(i.ESP8266_Send_AT_Cmd) refers to connect.o(.bss) for .bss
+    connect.o(i.ESP8266_UnvarnishSend) refers to connect.o(i.ESP8266_Send_AT_Cmd) for ESP8266_Send_AT_Cmd
+    connect.o(i.MQTT_SendString) refers to connect.o(i.ESP8266_MQTTPUB) for ESP8266_MQTTPUB
+    connect.o(i.MQTT_SendString) refers to stm32f1xx_hal.o(i.HAL_Delay) for HAL_Delay
     connect.o(i.USART1_printf) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
     connect.o(i.USART1_printf) refers to usart.o(.bss) for huart1
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry10a.o(.ARM.Collect$$$$0000000F) for __rt_final_cpp
@@ -1932,8 +1956,19 @@ Removing Unused input sections from the image.
     Removing connect.o(.rrx_text), (6 bytes).
     Removing connect.o(i.ESP8266_AT_RESTORE), (88 bytes).
     Removing connect.o(i.ESP8266_Enable_MultipleId), (60 bytes).
+    Removing connect.o(i.ESP8266_ExitUnvarnishSend), (36 bytes).
+    Removing connect.o(i.ESP8266_Get_LinkStatus), (128 bytes).
     Removing connect.o(i.ESP8266_JoinAP), (60 bytes).
+    Removing connect.o(i.ESP8266_Link_Server), (176 bytes).
+    Removing connect.o(i.ESP8266_MQTTCLEAN), (52 bytes).
+    Removing connect.o(i.ESP8266_MQTTCONN), (64 bytes).
+    Removing connect.o(i.ESP8266_MQTTPUB), (68 bytes).
+    Removing connect.o(i.ESP8266_MQTTSUB), (56 bytes).
+    Removing connect.o(i.ESP8266_MQTTUSERCFG), (84 bytes).
     Removing connect.o(i.ESP8266_Net_Mode_Choose), (96 bytes).
+    Removing connect.o(i.ESP8266_SendString), (132 bytes).
+    Removing connect.o(i.ESP8266_UnvarnishSend), (76 bytes).
+    Removing connect.o(i.MQTT_SendString), (20 bytes).
     Removing fadd.o(.text), (176 bytes).
     Removing fmul.o(.text), (100 bytes).
     Removing fdiv.o(.text), (124 bytes).
@@ -1949,7 +1984,7 @@ Removing Unused input sections from the image.
     Removing dfixul.o(.text), (48 bytes).
     Removing cdrcmple.o(.text), (48 bytes).
 
-631 unused section(s) (total 53322 bytes) removed from the image.
+642 unused section(s) (total 54214 bytes) removed from the image.
 
 ==============================================================================
 
@@ -2545,23 +2580,23 @@ Memory Map of the image
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x08000000   0x08000000   0x000000ec   Data   RO         4496    RESET               startup_stm32f103xb.o
-    0x080000ec   0x080000ec   0x00000000   Code   RO         4687  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
-    0x080000ec   0x080000ec   0x00000004   Code   RO         4983    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
-    0x080000f0   0x080000f0   0x00000004   Code   RO         4986    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
-    0x080000f4   0x080000f4   0x00000000   Code   RO         4988    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
-    0x080000f4   0x080000f4   0x00000000   Code   RO         4990    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
-    0x080000f4   0x080000f4   0x00000008   Code   RO         4991    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
-    0x080000fc   0x080000fc   0x00000004   Code   RO         4998    .ARM.Collect$$$$0000000E  mc_w.l(entry12b.o)
-    0x08000100   0x08000100   0x00000000   Code   RO         4993    .ARM.Collect$$$$0000000F  mc_w.l(entry10a.o)
-    0x08000100   0x08000100   0x00000000   Code   RO         4995    .ARM.Collect$$$$00000011  mc_w.l(entry11a.o)
-    0x08000100   0x08000100   0x00000004   Code   RO         4984    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x080000ec   0x080000ec   0x00000000   Code   RO         4753  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
+    0x080000ec   0x080000ec   0x00000004   Code   RO         5049    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x080000f0   0x080000f0   0x00000004   Code   RO         5052    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x080000f4   0x080000f4   0x00000000   Code   RO         5054    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x080000f4   0x080000f4   0x00000000   Code   RO         5056    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x080000f4   0x080000f4   0x00000008   Code   RO         5057    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x080000fc   0x080000fc   0x00000004   Code   RO         5064    .ARM.Collect$$$$0000000E  mc_w.l(entry12b.o)
+    0x08000100   0x08000100   0x00000000   Code   RO         5059    .ARM.Collect$$$$0000000F  mc_w.l(entry10a.o)
+    0x08000100   0x08000100   0x00000000   Code   RO         5061    .ARM.Collect$$$$00000011  mc_w.l(entry11a.o)
+    0x08000100   0x08000100   0x00000004   Code   RO         5050    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
     0x08000104   0x08000104   0x00000096   Code   RO         4417    .emb_text           port.o
     0x0800019a   0x0800019a   0x00000002   PAD
     0x0800019c   0x0800019c   0x00000024   Code   RO         4497    .text               startup_stm32f103xb.o
-    0x080001c0   0x080001c0   0x00000024   Code   RO         4696    .text               mc_w.l(memseta.o)
-    0x080001e4   0x080001e4   0x00000024   Code   RO         4698    .text               mc_w.l(strstr.o)
-    0x08000208   0x08000208   0x0000002c   Code   RO         5000    .text               mc_w.l(uidiv.o)
-    0x08000234   0x08000234   0x00000024   Code   RO         5017    .text               mc_w.l(init.o)
+    0x080001c0   0x080001c0   0x00000024   Code   RO         4762    .text               mc_w.l(memseta.o)
+    0x080001e4   0x080001e4   0x00000024   Code   RO         4764    .text               mc_w.l(strstr.o)
+    0x08000208   0x08000208   0x0000002c   Code   RO         5066    .text               mc_w.l(uidiv.o)
+    0x08000234   0x08000234   0x00000024   Code   RO         5083    .text               mc_w.l(init.o)
     0x08000258   0x08000258   0x0000000c   Code   RO          458    i.ADC1_2_IRQHandler  stm32f1xx_it.o
     0x08000264   0x08000264   0x00000056   Code   RO          651    i.ADC_ConversionStop_Disable  stm32f1xx_hal_adc.o
     0x080002ba   0x080002ba   0x0000004e   Code   RO          652    i.ADC_DMAConvCplt   stm32f1xx_hal_adc.o
@@ -2574,9 +2609,9 @@ Memory Map of the image
     0x08000404   0x08000404   0x0000000c   Code   RO          460    i.DMA1_Channel1_IRQHandler  stm32f1xx_it.o
     0x08000410   0x08000410   0x0000002a   Code   RO         1305    i.DMA_SetConfig     stm32f1xx_hal_dma.o
     0x0800043a   0x0800043a   0x00000002   Code   RO          461    i.DebugMon_Handler  stm32f1xx_it.o
-    0x0800043c   0x0800043c   0x0000004c   Code   RO         4603    i.ESP8266_Init      connect.o
-    0x08000488   0x08000488   0x0000002c   Code   RO         4606    i.ESP8266_Rst       connect.o
-    0x080004b4   0x080004b4   0x0000009c   Code   RO         4607    i.ESP8266_Send_AT_Cmd  connect.o
+    0x0800043c   0x0800043c   0x0000004c   Code   RO         4605    i.ESP8266_Init      connect.o
+    0x08000488   0x08000488   0x0000002c   Code   RO         4614    i.ESP8266_Rst       connect.o
+    0x080004b4   0x080004b4   0x0000009c   Code   RO         4616    i.ESP8266_Send_AT_Cmd  connect.o
     0x08000550   0x08000550   0x00000008   Code   RO          462    i.EXTI15_10_IRQHandler  stm32f1xx_it.o
     0x08000558   0x08000558   0x0000002c   Code   RO            5    i.Error_Handler     main.o
     0x08000584   0x08000584   0x000000d8   Code   RO          831    i.HAL_ADCEx_Calibration_Start  stm32f1xx_hal_adc_ex.o
@@ -2647,7 +2682,7 @@ Memory Map of the image
     0x08001f12   0x08001f12   0x00000002   PAD
     0x08001f14   0x08001f14   0x00000104   Code   RO          405    i.HAL_UART_MspInit  usart.o
     0x08002018   0x08002018   0x0000002a   Code   RO         2909    i.HAL_UART_Receive_IT  stm32f1xx_hal_uart.o
-    0x08002042   0x08002042   0x00000002   Code   RO         4608    i.HAL_UART_RxCpltCallback  connect.o
+    0x08002042   0x08002042   0x00000002   Code   RO         4618    i.HAL_UART_RxCpltCallback  connect.o
     0x08002044   0x08002044   0x000000b2   Code   RO         2912    i.HAL_UART_Transmit  stm32f1xx_hal_uart.o
     0x080020f6   0x080020f6   0x00000002   Code   RO         2915    i.HAL_UART_TxCpltCallback  stm32f1xx_hal_uart.o
     0x080020f8   0x080020f8   0x00000002   Code   RO          463    i.HardFault_Handler  stm32f1xx_it.o
@@ -2679,16 +2714,16 @@ Memory Map of the image
     0x08002736   0x08002736   0x00000064   Code   RO         2933    i.UART_WaitOnFlagUntilTimeout  stm32f1xx_hal_uart.o
     0x0800279a   0x0800279a   0x00000002   PAD
     0x0800279c   0x0800279c   0x0000007c   Code   RO          468    i.USART1_IRQHandler  stm32f1xx_it.o
-    0x08002818   0x08002818   0x00000128   Code   RO         4609    i.USART1_printf     connect.o
+    0x08002818   0x08002818   0x00000128   Code   RO         4620    i.USART1_printf     connect.o
     0x08002940   0x08002940   0x00000002   Code   RO          469    i.UsageFault_Handler  stm32f1xx_it.o
     0x08002942   0x08002942   0x00000002   PAD
-    0x08002944   0x08002944   0x00000020   Code   RO         4791    i.__0printf$3       mc_w.l(printf3.o)
+    0x08002944   0x08002944   0x00000020   Code   RO         4857    i.__0printf$3       mc_w.l(printf3.o)
     0x08002964   0x08002964   0x00000020   Code   RO         1415    i.__NVIC_SetPriority  stm32f1xx_hal_cortex.o
-    0x08002984   0x08002984   0x0000000e   Code   RO         5021    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x08002992   0x08002992   0x00000002   Code   RO         5022    i.__scatterload_null  mc_w.l(handlers.o)
-    0x08002994   0x08002994   0x0000000e   Code   RO         5023    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x08002984   0x08002984   0x0000000e   Code   RO         5087    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x08002992   0x08002992   0x00000002   Code   RO         5088    i.__scatterload_null  mc_w.l(handlers.o)
+    0x08002994   0x08002994   0x0000000e   Code   RO         5089    i.__scatterload_zeroinit  mc_w.l(handlers.o)
     0x080029a2   0x080029a2   0x00000002   PAD
-    0x080029a4   0x080029a4   0x000001b8   Code   RO         4798    i._printf_core      mc_w.l(printf3.o)
+    0x080029a4   0x080029a4   0x000001b8   Code   RO         4864    i._printf_core      mc_w.l(printf3.o)
     0x08002b5c   0x08002b5c   0x00000018   Code   RO         4504    i.fputc             uart_printf.o
     0x08002b74   0x08002b74   0x00000054   Code   RO            8    i.main              main.o
     0x08002bc8   0x08002bc8   0x00000020   Code   RO         3697    i.prvResetNextTaskUnblockTime  tasks.o
@@ -2699,7 +2734,7 @@ Memory Map of the image
     0x08002c84   0x08002c84   0x000000c8   Code   RO         3730    i.xTaskIncrementTick  tasks.o
     0x08002d4c   0x08002d4c   0x00000010   Data   RO         3234    .constdata          system_stm32f1xx.o
     0x08002d5c   0x08002d5c   0x00000008   Data   RO         3235    .constdata          system_stm32f1xx.o
-    0x08002d64   0x08002d64   0x00000020   Data   RO         5019    Region$$Table       anon$$obj.o
+    0x08002d64   0x08002d64   0x00000020   Data   RO         5085    Region$$Table       anon$$obj.o
 
 
     Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08002d84, Size: 0x00000c10, Max: 0x00005000, ABSOLUTE)
@@ -2710,16 +2745,16 @@ Memory Map of the image
     0x2000000c   0x08002d90   0x00000004   Data   RW         3236    .data               system_stm32f1xx.o
     0x20000010   0x08002d94   0x0000003c   Data   RW         3739    .data               tasks.o
     0x2000004c   0x08002dd0   0x00000010   Data   RW         4537    .data               adc_get_gas.o
-    0x2000005c   0x08002de0   0x00000001   Data   RW         4611    .data               connect.o
+    0x2000005c   0x08002de0   0x00000001   Data   RW         4622    .data               connect.o
     0x2000005d   0x08002de1   0x00000003   PAD
-    0x20000060   0x08002de4   0x00000004   Data   RW         4999    .data               mc_w.l(stdout.o)
+    0x20000060   0x08002de4   0x00000004   Data   RW         5065    .data               mc_w.l(stdout.o)
     0x20000064        -       0x00000074   Zero   RW          299    .bss                adc.o
     0x200000d8        -       0x00000048   Zero   RW          365    .bss                tim.o
     0x20000120        -       0x000000cc   Zero   RW          409    .bss                usart.o
     0x200001ec        -       0x00000048   Zero   RW          579    .bss                stm32f1xx_hal_timebase_tim.o
     0x20000234        -       0x000001cc   Zero   RW         3738    .bss                tasks.o
     0x20000400        -       0x0000000c   Zero   RW         4536    .bss                adc_get_gas.o
-    0x2000040c        -       0x00000402   Zero   RW         4610    .bss                connect.o
+    0x2000040c        -       0x00000402   Zero   RW         4621    .bss                connect.o
     0x2000080e   0x08002de8   0x00000002   PAD
     0x20000810        -       0x00000400   Zero   RW         4494    STACK               startup_stm32f103xb.o
 
