@@ -23,16 +23,12 @@
 
 /* I2C address of OLED (do not modify) */
 #define OLED0561_ADD	0x78 
-
 /* OLED instruction (no modification) */
 #define COM				0x00
-
 /* OLED data (no modification) */
 #define DAT 			0x40 
 
 /* Data structure declaration-------------------------------------------------*/
-
-
 
 /* Function declaration-------------------------------------------------------*/
 
@@ -61,7 +57,7 @@ uint8_t OLED_ShowStr(uint8_t x, uint8_t y, uint8_t ch[], uint8_t TextSize);
 /* OLED display character */
 uint8_t OLED_ShowChar(uint8_t x, uint8_t y, uint8_t chr, uint8_t Char_Size);
 /* Display 2 numbers */
-uint8_t OLED_ShowNum(uint8_t x,uint8_t y,uint32_t num,uint8_t len,uint8_t size2);
+uint8_t OLED_ShowNum(uint8_t x,uint8_t y,uint32_t num,uint8_t len,uint8_t Char_Size );
 	
 
 #ifdef __cplusplus

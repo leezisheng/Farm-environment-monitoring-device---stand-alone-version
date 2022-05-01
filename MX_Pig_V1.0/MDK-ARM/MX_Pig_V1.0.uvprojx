@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xB</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;         ../Drivers/STM32F1xx_HAL_Driver/Inc;         ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;         ../Middlewares/Third_Party/FreeRTOS/Source/include;         ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;         ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3;         ../Drivers/CMSIS/Device/ST/STM32F1xx/Include;         ../Drivers/CMSIS/Include;         ..\Common;         ..\Hardware\inc</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;..\Common;..\Hardware\inc;..\Task\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -624,19 +624,19 @@
               <FilePath>..\Hardware\src\UART_Printf\UART_Printf.c</FilePath>
             </File>
             <File>
-              <FileName>ADC_Get_Gas.c</FileName>
+              <FileName>ESP8266.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Hardware\src\ADC_Get_Gas\ADC_Get_Gas.c</FilePath>
+              <FilePath>..\Hardware\src\ESP8266\ESP8266.c</FilePath>
             </File>
             <File>
-              <FileName>Connect.c</FileName>
+              <FileName>OLED.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Hardware\src\Connect_ESP8266\Connect.c</FilePath>
+              <FilePath>..\Hardware\src\OLED\OLED.c</FilePath>
             </File>
             <File>
-              <FileName>Display.c</FileName>
+              <FileName>ADC_Operation.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Hardware\src\Display\Display.c</FilePath>
+              <FilePath>..\Hardware\src\ADC_Operation\ADC_Operation.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -647,6 +647,26 @@
               <FileName>readme.txt</FileName>
               <FileType>5</FileType>
               <FilePath>..\Doc\readme.txt</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Task</GroupName>
+          <Files>
+            <File>
+              <FileName>Display_Data_Task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Task\src\Display_Data_Task.c</FilePath>
+            </File>
+            <File>
+              <FileName>Get_Sensor_Task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Task\src\Get_Sensor_Task.c</FilePath>
+            </File>
+            <File>
+              <FileName>Connect_Iot_Task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Task\src\Connect_Iot_Task.c</FilePath>
             </File>
           </Files>
         </Group>

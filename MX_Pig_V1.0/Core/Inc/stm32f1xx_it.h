@@ -29,7 +29,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "numtype.h"
-#include "Connect.h"
+#include "ESP8266.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

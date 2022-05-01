@@ -52,7 +52,7 @@
  */
  
 /* Includes ------------------------------------------------------------------*/
-#include "ADC_Get_Gas.h"
+#include "ADC_Operation.h"
 #include "adc.h"
 #include "dma.h"
 

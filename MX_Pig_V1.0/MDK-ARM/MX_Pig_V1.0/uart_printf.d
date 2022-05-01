@@ -35,3 +35,5 @@ mx_pig_v1.0\uart_printf.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uar
 mx_pig_v1.0\uart_printf.o: ..\Common\numtype.h
 mx_pig_v1.0\uart_printf.o: D:\Lee\MDK5\ARM\ARMCC\Bin\..\include\stdio.h
 mx_pig_v1.0\uart_printf.o: ../Core/Inc/usart.h
+mx_pig_v1.0\uart_printf.o: D:\Lee\MDK5\ARM\ARMCC\Bin\..\include\stdarg.h
+mx_pig_v1.0\uart_printf.o: D:\Lee\MDK5\ARM\ARMCC\Bin\..\include\string.h

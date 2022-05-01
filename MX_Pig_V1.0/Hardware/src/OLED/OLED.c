@@ -7,7 +7,7 @@
  */
   
 /* Includes ------------------------------------------------------------------*/
-#include "Display.h"
+#include "OLED.h"
 #include "i2c.h"
 
 /* Font header file */
@@ -211,6 +211,7 @@ uint8_t OLED_OFF(void)
 * @return {uint8_t  }           : if success,return (uint8_t)OPERATION_SUCCESS
 * @author: leeqingshui 
 */
+
 uint8_t OLED_ShowStr(uint8_t x, uint8_t y, uint8_t ch[], uint8_t TextSize)
 {
 	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
@@ -268,6 +269,11 @@ uint8_t OLED_ShowStr(uint8_t x, uint8_t y, uint8_t ch[], uint8_t TextSize)
 				j++;
 			}
 		}break;
+		
+		default:
+			ret = (uint8_t)OPERATION_FALSE;
+		break;
+	
 	}
 
 	return ret;
@@ -297,24 +303,34 @@ uint8_t OLED_ShowChar(uint8_t x, uint8_t y, uint8_t chr, uint8_t Char_Size)
 		y=y+2;
 	}
 	
-	if(Char_Size ==16)
+	switch( Char_Size )
 	{
-		ret = OLED_SetPos(x,y) && ret;	
+		case 1 :	
+		{
+			ret = OLED_SetPos(x,y) && ret;	
+			
+			for(i=0;i<8;i++)
+				ret = WriteDat(F8X16[c*16+i]) && ret;
+			
+			ret =OLED_SetPos(x,y+1) && ret;
+			
+			for(i=0;i<8;i++)
+				ret = WriteDat(F8X16[c*16+i+8]) && ret;
+		}break;
 		
-		for(i=0;i<8;i++)
-			ret = WriteDat(F8X16[c*16+i]) && ret;
+		case 2 :
+		{
+			ret = OLED_SetPos(x,y) && ret;
+			
+			for(i=0;i<6;i++)
+				ret = WriteDat(F6x8[c][i]) && ret;
+		}
+		break;
 		
-		ret =OLED_SetPos(x,y+1) && ret;
+		default:
+			ret = (uint8_t)OPERATION_FALSE;
+		break;
 		
-		for(i=0;i<8;i++)
-			ret = WriteDat(F8X16[c*16+i+8]) && ret;
-	}
-	else
-	{
-		ret = OLED_SetPos(x,y) && ret;
-		
-		for(i=0;i<6;i++)
-			ret = WriteDat(F6x8[c][i]) && ret;
 	}
 
 	return ret;
@@ -322,15 +338,15 @@ uint8_t OLED_ShowChar(uint8_t x, uint8_t y, uint8_t chr, uint8_t Char_Size)
 
 /** 
 * @description: Display 2 numbers
-* @param  {uint8_t}  x	     : The x-coordinate of our starting point ， x:0~127
-* @param  {uint8_t}  y		 : The y-coordinate of our starting point ， y:0~7
-* @param  {uint32_t} num	 : Two digits
-* @param  {uint8_t}  len     : Digital digits
-* @param  {uint8_t}  size2   : font size , 1:6*8 ; 2:8*16
+* @param  {uint8_t}  x	     	: The x-coordinate of our starting point ， x:0~127
+* @param  {uint8_t}  y			: The y-coordinate of our starting point ， y:0~7
+* @param  {uint32_t} num	 	: Two digits
+* @param  {uint8_t}  len     	: Digital digits
+* @param  {uint8_t}  Char_Size  : font size , 1:6*8 ; 2:8*16
 * @return {uint8_t} : if success,return (uint8_t)OPERATION_SUCCESS
 * @author: leeqingshui 
 */
-uint8_t OLED_ShowNum(uint8_t x,uint8_t y,uint32_t num,uint8_t len,uint8_t size2)
+uint8_t OLED_ShowNum(uint8_t x,uint8_t y,uint32_t num,uint8_t len,uint8_t Char_Size )
 {
 	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
 	
@@ -345,14 +361,14 @@ uint8_t OLED_ShowNum(uint8_t x,uint8_t y,uint32_t num,uint8_t len,uint8_t size2)
 		{
 			if( temp == 0 )
 			{
-				ret = OLED_ShowChar( x + ( size2/2 )*t, y, ' ', size2) && ret;
+				ret = OLED_ShowChar( x + ( Char_Size/2 )*t, y, ' ', Char_Size) && ret;
 					continue;
 			}
 			else 
 				enshow=1;  
 		}
 		
-	 	ret = OLED_ShowChar(x+(size2/2)*t,y,temp+'0',size2) && ret; 
+	 	ret = OLED_ShowChar(x+(Char_Size/2)*t,y,temp+'0',Char_Size) && ret; 
 	}
 	
 	return ret;

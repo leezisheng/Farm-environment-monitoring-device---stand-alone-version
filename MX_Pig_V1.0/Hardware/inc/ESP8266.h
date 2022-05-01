@@ -177,12 +177,6 @@ uint8_t ESP8266_MQTTCLEAN(void);
 /* ESP8266 Sends a character string */
 uint8_t MQTT_SendString(char * pTopic,char *temp);
 
-/* Configuration functions related to the development board */			
-
-/* Serial port redirection: Serial port 1 only!! */
-uint8_t USART1_printf(const char* Data, ...);
-
-
 #ifdef __cplusplus
 }
 #endif

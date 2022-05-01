@@ -30,17 +30,25 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
-/* UART3 output header file */
+/* Hardware-related header files */
+
+/* Includes redirection for serial port 3 and imitation redirection functions for serial port 1  */
 #include "UART_Printf.h"
+/* ADC initialization and single scan operation */
+#include "ADC_Operation.h"
+/* Including ESP8266 initialization and AT-TCP, AT-MQTT instruction send and receive operation functions */
+#include "ESP8266.h"
+/* This includes the use of hardware IIC to connect the OLED screen for initialization, display characters, and string functions */
+#include "OLED.h"
 
-/* Internal reference voltage, temperature, gas concentration header file is obtained via ADC1 */
-#include "ADC_Get_Gas.h"
+/* Header files associated with tasks and task operations */
 
-/* STM32 connect esp8266 by uart1 to send message to IoT Platform */
-#include "Connect.h"
-
-/* Hardware IIC is used to drive the 1.3-inch OLED screen to display the collected data */
-#include "Display.h"
+/* OLED displays the value obtained by the sensor in real time */
+#include "Display_Data_Task.h"
+/* Obtain internal reference voltage and gas concentration collected by ADC and temperature and humidity data collected by DTH11 */
+#include "Get_Sensor_Task.h"
+/* Connect to Ali Cloud Iot platform by operating ESP8266 via AT command */
+#include "Connect_Iot_Task.h"
 
 /* USER CODE END Includes */
 
@@ -123,20 +131,9 @@ int main(void)
 	  Error_Handler();
   }
   
-  uint8_t str[] ="aaa";  
-  
-  OLED_CLS();
-
-  OLED_ON();
-  
-  OLED_ShowChar(0,0, 'a', 16);
-  
-  OLED_ShowStr(0, 7, str, 1);
-  
   while(1)
   {
-	 
-
+	
       HAL_Delay(500);
 	  ESP8266_Send_AT_Cmd("AT","OK",NULL,1000);
   }

@@ -29,6 +29,8 @@
 
 /* Function declaration-------------------------------------------------------*/
 
+/* Serial port redirection: Serial port 1 only!! */
+uint8_t USART1_printf(const char* Data, ...);
 
 #ifdef __cplusplus
 }
