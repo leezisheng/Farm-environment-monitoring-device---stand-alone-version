@@ -123,8 +123,20 @@ int main(void)
 	  Error_Handler();
   }
   
+  uint8_t str[] ="aaa";  
+  
+  OLED_CLS();
+
+  OLED_ON();
+  
+  OLED_ShowChar(0,0, 'a', 16);
+  
+  OLED_ShowStr(0, 7, str, 1);
+  
   while(1)
   {
+	 
+
       HAL_Delay(500);
 	  ESP8266_Send_AT_Cmd("AT","OK",NULL,1000);
   }
@@ -245,6 +257,14 @@ int32_t BSP_Init(void)
 	/* ----------------------------ESP8266 Operation----------------------- */
 	/* ESP8266 initialization */
 	if (ESP8266_Init() != (uint8_t)OPERATION_SUCCESS)
+	{
+		Error_Handler();
+		ret= (int32_t)OPERATION_ERROR;
+	}
+	
+	/* ----------------------------ESP8266 Operation----------------------- */
+	
+	if (OLED_Init() != (uint8_t)OPERATION_SUCCESS)
 	{
 		Error_Handler();
 		ret= (int32_t)OPERATION_ERROR;

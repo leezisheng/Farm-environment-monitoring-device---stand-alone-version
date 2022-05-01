@@ -39,7 +39,10 @@ uint8_t WriteCmd(uint8_t I2C_Command)
 {
 	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
 
-	ret = HAL_I2C_Mem_Write(&hi2c1,OLED0561_ADD,COM,I2C_MEMADD_SIZE_8BIT,&I2C_Command,1,100);
+	if(HAL_I2C_Mem_Write(&hi2c1,OLED0561_ADD,COM,I2C_MEMADD_SIZE_8BIT,&I2C_Command,1,1000) != HAL_OK)
+	{
+		ret = (uint8_t)OPERATION_ERROR;
+	}
 
 	return ret;
 }
@@ -54,7 +57,10 @@ uint8_t WriteDat(uint8_t I2C_Data)
 {
 	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
 
-	ret = HAL_I2C_Mem_Write(&hi2c1,OLED0561_ADD,DAT,I2C_MEMADD_SIZE_8BIT,&I2C_Data,1,100);
+	if( HAL_I2C_Mem_Write(&hi2c1,OLED0561_ADD,DAT,I2C_MEMADD_SIZE_8BIT,&I2C_Data,1,1000) != HAL_OK)
+	{
+		ret = (uint8_t)OPERATION_ERROR;
+	}
 
 	return ret;
 }
@@ -71,7 +77,7 @@ uint8_t OLED_Init(void)
 {
 	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
 
-	HAL_Delay(100); //--The delay cannot be removed
+	HAL_Delay(500); //--The delay cannot be removed
 	
 	ret = 	WriteCmd(0xAE)		&& 	//--display off
 			WriteCmd(0x20)		&&	//--Set Memory Addressing Mode	
