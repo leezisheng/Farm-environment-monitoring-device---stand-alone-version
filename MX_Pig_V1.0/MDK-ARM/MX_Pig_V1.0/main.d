@@ -56,3 +56,4 @@ mx_pig_v1.0\main.o: ../Core/Inc/gpio.h
 mx_pig_v1.0\main.o: ..\Hardware\inc\UART_Printf.h
 mx_pig_v1.0\main.o: ..\Hardware\inc\ADC_Get_Gas.h
 mx_pig_v1.0\main.o: ..\Hardware\inc\Connect.h
+mx_pig_v1.0\main.o: ..\Hardware\inc\Display.h

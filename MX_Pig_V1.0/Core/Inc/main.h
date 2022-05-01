@@ -35,7 +35,9 @@ extern "C" {
 
 /* Common data type header file */
 #include "numtype.h"
+
 #include <stdio.h>
+
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

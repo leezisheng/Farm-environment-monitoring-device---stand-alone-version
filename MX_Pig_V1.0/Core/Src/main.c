@@ -39,6 +39,9 @@
 /* STM32 connect esp8266 by uart1 to send message to IoT Platform */
 #include "Connect.h"
 
+/* Hardware IIC is used to drive the 1.3-inch OLED screen to display the collected data */
+#include "Display.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
