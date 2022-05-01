@@ -26,6 +26,7 @@ mx_pig_v1.0\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h
 mx_pig_v1.0\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h
 mx_pig_v1.0\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
 mx_pig_v1.0\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
+mx_pig_v1.0\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h
 mx_pig_v1.0\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
 mx_pig_v1.0\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 mx_pig_v1.0\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
@@ -48,6 +49,7 @@ mx_pig_v1.0\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 mx_pig_v1.0\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 mx_pig_v1.0\main.o: ../Core/Inc/adc.h
 mx_pig_v1.0\main.o: ../Core/Inc/dma.h
+mx_pig_v1.0\main.o: ../Core/Inc/i2c.h
 mx_pig_v1.0\main.o: ../Core/Inc/tim.h
 mx_pig_v1.0\main.o: ../Core/Inc/usart.h
 mx_pig_v1.0\main.o: ../Core/Inc/gpio.h

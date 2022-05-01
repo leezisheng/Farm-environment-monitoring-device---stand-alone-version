@@ -262,11 +262,7 @@ void USART1_IRQHandler(void)
   #endif  
   
   /* USER CODE END USART1_IRQn 0 */
-  
-  #if  !CHANGE_UART1_IT
   HAL_UART_IRQHandler(&huart1);
-  #endif  
-  
   /* USER CODE BEGIN USART1_IRQn 1 */
     
   /* USER CODE END USART1_IRQn 1 */

@@ -1,0 +1,6 @@
+--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\Common -I ..\Hardware\inc
+-I.\RTE\_MX_Pig_V1.0
+-ID:\Lee\MDK5\ARM\CMSIS\5.8.0\CMSIS\Core\Include
+-ID:\Lee\MDK5\Keil\STM32F1xx_DFP\1.0.5\Device\Include
+-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB
+-o mx_pig_v1.0\displey.o --omf_browse mx_pig_v1.0\displey.crf --depend mx_pig_v1.0\displey.d "..\Hardware\src\Display\Displey.c"
