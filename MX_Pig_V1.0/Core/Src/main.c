@@ -74,7 +74,8 @@
 extern __IO uint16_t   aADCxConvertedValues[ADCCONVERTEDVALUES_BUFFER_SIZE];
 extern uint8_t         ubSequenceCompleted;
 
-float temp=0;
+uint8_t temp = 0;
+uint8_t humi = 0;
 
 /* USER CODE END PV */
 
@@ -135,7 +136,8 @@ int main(void)
   
   while(1)
   {
-		Test_Delay_us(10);
+	DHT11_ReadData(&temp,&humi);   
+	HAL_Delay(500);
   }
   /* USER CODE END 2 */
 
@@ -259,9 +261,16 @@ int32_t BSP_Init(void)
 		ret= (int32_t)OPERATION_ERROR;
 	}
 	
-	/* ----------------------------ESP8266 Operation----------------------- */
+	/* ----------------------------OLED Operation----------------------- */
 	
 	if (OLED_Init() != (uint8_t)OPERATION_SUCCESS)
+	{
+		Error_Handler();
+		ret= (int32_t)OPERATION_ERROR;
+	}
+	
+	/* ----------------------------DTH11 Operation----------------------- */
+	if (DHT11_Init() != (uint8_t)OPERATION_SUCCESS)
 	{
 		Error_Handler();
 		ret= (int32_t)OPERATION_ERROR;

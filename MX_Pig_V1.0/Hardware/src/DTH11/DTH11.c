@@ -19,7 +19,21 @@
 
 
 /* Static function definition-------------------------------------------------*/
+
+/* Imprecise microsecond level delay function */
 static void Delay_us(uint32_t us);
+/* Set the working mode of the DTH11 port to push-pull output mode */
+static void DHT11_IO_OUT (void);
+/* Set the working mode of the DTH11 port to input mode */
+static void DHT11_IO_IN (void);
+/* DHT11 port resets and sends a start signal */
+static void DHT11_RST (void);
+/* Wait for DHT11 to respond. 0: DHT11 is not detected. 1: DHT11 is successfully received */
+static uint8_t Dht11_Check(void);
+/* Read a bit from DHT11 */
+static uint8_t Dht11_ReadBit(void);
+/* Read a byte from DHT11 */
+static uint8_t Dht11_ReadByte(void);
 
 /* Function definition--------------------------------------------------------*/
 
@@ -29,7 +43,7 @@ static void Delay_us(uint32_t us);
 * @return {void}
 * @author: leeqingshui 
 */
-void DHT11_IO_OUT (void)
+static void DHT11_IO_OUT (void)
 { 
 	GPIO_InitTypeDef GPIO_InitStruct = {0};
 	GPIO_InitStruct.Pin = DTH11_Pin;
@@ -45,7 +59,7 @@ void DHT11_IO_OUT (void)
 * @return {void}
 * @author: leeqingshui 
 */
-void DHT11_IO_IN (void)
+static void DHT11_IO_IN (void)
 { 
 	GPIO_InitTypeDef GPIO_InitStruct = {0};
 	GPIO_InitStruct.Pin = DTH11_Pin;
@@ -60,7 +74,7 @@ void DHT11_IO_IN (void)
 * @return {void}
 * @author: leeqingshui 
 */
-void DHT11_RST (void)
+static void DHT11_RST (void)
 {
 	DHT11_IO_OUT();
 	DHT11_PIN_RESET;
@@ -77,7 +91,7 @@ void DHT11_RST (void)
 * @return {uint8_t} : if success,return (uint8_t)OPERATION_SUCCESS , else return OPERATION_ERROR Indicates that no DHT11 reply is detected
 * @author: leeqingshui 
 */
-uint8_t Dht11_Check(void)
+static uint8_t Dht11_Check(void)
 {
 	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
 	uint8_t retry=0;
@@ -132,7 +146,7 @@ uint8_t DHT11_Init (void)
 * @return {uint8_t} : Data bits, 0 or 1
 * @author: leeqingshui 
 */
-uint8_t Dht11_ReadBit(void)
+static uint8_t Dht11_ReadBit(void)
 {
 	uint8_t retry=0;
 	
@@ -167,7 +181,7 @@ uint8_t Dht11_ReadBit(void)
 * @return {uint8_t} : Data byte
 * @author: leeqingshui 
 */
-uint8_t Dht11_ReadByte(void)
+static uint8_t Dht11_ReadByte(void)
 {
     uint8_t i,dat;
     dat=0;
@@ -183,13 +197,12 @@ uint8_t Dht11_ReadByte(void)
 
 /** 
 * @description: Read temperature and humidity data once
-* @param  {uint8_t} pdata : Pointer to the temperature and humidity data array
-*                   		Humidity value (decimal, 20%-90%)
-*							Temperature value (decimal, range :0~50°)
+* @param  {uint8_t} ptemp : Pointer to the temperature and humidity data array , Temperature value (decimal, range :0~50°)
+* @param  {uint8_t} phumi : Humidity value (decimal, 20%-90%)
 * @return {uint8_t} : if success,return (uint8_t)OPERATION_SUCCESS , else return OPERATION_ERROR
 * @author: leeqingshui 
 */
-uint8_t DHT11_ReadData(uint8_t *pdata)
+uint8_t DHT11_ReadData(uint8_t *ptemp , uint8_t *phumi)
 {
 	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
 
@@ -212,10 +225,9 @@ uint8_t DHT11_ReadData(uint8_t *pdata)
         if((buf[0]+buf[1]+buf[2]+buf[3])==buf[4])
         {	
 			// Put the humidity value into pointer 1
-            *pdata=buf[0]; 
-			pdata++;
+            *phumi=buf[0]; 
 			// Put the temperature value into pointer 2
-            *pdata=buf[2]; 
+            *ptemp=buf[2]; 
         }
     }
 	else 
