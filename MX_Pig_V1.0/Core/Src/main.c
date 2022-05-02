@@ -40,6 +40,8 @@
 #include "ESP8266.h"
 /* This includes the use of hardware IIC to connect the OLED screen for initialization, display characters, and string functions */
 #include "OLED.h"
+/* Through software operation GPIO and DTH11 for single-bus communication, initialization, data reading, etc */
+#include "DTH11.h"
 
 /* Header files associated with tasks and task operations */
 
@@ -133,9 +135,7 @@ int main(void)
   
   while(1)
   {
-	
-      HAL_Delay(500);
-	  ESP8266_Send_AT_Cmd("AT","OK",NULL,1000);
+		Test_Delay_us(10);
   }
   /* USER CODE END 2 */
 

@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xB</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;..\Common;..\Hardware\inc;..\Task\inc</IncludePath>
+              <IncludePath>../Core/Inc;  ../Drivers/STM32F1xx_HAL_Driver/Inc;  ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;  ../Middlewares/Third_Party/FreeRTOS/Source/include;  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;  ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3;  ../Drivers/CMSIS/Device/ST/STM32F1xx/Include;  ../Drivers/CMSIS/Include;  ..\Common;  ..\Hardware\inc;  ..\Task\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -637,6 +637,11 @@
               <FileName>ADC_Operation.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Hardware\src\ADC_Operation\ADC_Operation.c</FilePath>
+            </File>
+            <File>
+              <FileName>DTH11.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\src\DTH11\DTH11.c</FilePath>
             </File>
           </Files>
         </Group>

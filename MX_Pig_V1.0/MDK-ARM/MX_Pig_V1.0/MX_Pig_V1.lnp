@@ -43,6 +43,7 @@
 "mx_pig_v1.0\esp8266.o"
 "mx_pig_v1.0\oled.o"
 "mx_pig_v1.0\adc_operation.o"
+"mx_pig_v1.0\dth11.o"
 "mx_pig_v1.0\display_data_task.o"
 "mx_pig_v1.0\get_sensor_task.o"
 "mx_pig_v1.0\connect_iot_task.o"

@@ -69,7 +69,7 @@
 #define RANGE_12BITS                   ((uint32_t) 4095)   /* Max value with a full range of 12 bits */
 #define USERBUTTON_CLICK_COUNT_MAX     ((uint32_t)    4)   /* Maximum value of variable "UserButtonClickCount" */
 
-#define ADCCONVERTEDVALUES_BUFFER_SIZE ((uint32_t)    6)   /* Size of array containing ADC converted values: set to ADC sequencer number of ranks converted, to have a rank in each address */
+#define ADCCONVERTEDVALUES_BUFFER_SIZE ((uint32_t)    5)   /* Size of array containing ADC converted values: set to ADC sequencer number of ranks converted, to have a rank in each address */
 
 #define INTERNAL_TEMPSENSOR_V25        ((int32_t)1430)         /* Internal temperature sensor, parameter V25 (unit: mV). Refer to device datasheet for min/typ/max values. */
 #define INTERNAL_TEMPSENSOR_AVGSLOPE   ((int32_t)4300)         /* Internal temperature sensor, parameter Avg_Slope (unit: uV/DegCelsius). Refer to device datasheet for min/typ/max values. */                
@@ -149,7 +149,6 @@
 
 /* Voltage and temperature offset items */
 #define VOLTAGE_OFFSET    4.0
-#define TEMP_OFFSET       -7
 
 /* Gas sensor output voltage and concentration fitting curve default macro function */
 
@@ -184,7 +183,6 @@ float    ADC_Get_CO2(void);
 float    ADC_Get_CO(void);
 float    ADC_Get_H2S(void);
 float    ADC_Get_Voltage(void);
-float    ADC_Get_Temp(void);
 
 #ifdef __cplusplus
 }

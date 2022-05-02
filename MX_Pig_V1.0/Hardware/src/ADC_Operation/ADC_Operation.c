@@ -72,7 +72,6 @@ static uint16_t   uhADCChannel_4_ToDAC_mVolt = 0;
 static uint16_t   uhADCChannel_6_ToDAC_mVolt = 0;
 static uint16_t   uhADCChannel_7_ToDAC_mVolt = 0;
 static uint16_t   uhADCChannel_8_ToDAC_mVolt = 0;
-static int32_t    wTemperature_DegreeCelsius = 0;
 static uint16_t   uhVrefInt_mVolt = 0;
 
 /* Variable to report ADC sequencer status */
@@ -112,8 +111,7 @@ int32_t ADC_Get_Gas(void)
       uhADCChannel_6_ToDAC_mVolt    = COMPUTATION_DIGITAL_12BITS_TO_VOLTAGE(aADCxConvertedValues[1]);
 	  uhADCChannel_7_ToDAC_mVolt    = COMPUTATION_DIGITAL_12BITS_TO_VOLTAGE(aADCxConvertedValues[2]);
 	  uhADCChannel_8_ToDAC_mVolt    = COMPUTATION_DIGITAL_12BITS_TO_VOLTAGE(aADCxConvertedValues[3]);
-      wTemperature_DegreeCelsius    = COMPUTATION_TEMPERATURE_STD_PARAMS(aADCxConvertedValues[4]);
-	  uhVrefInt_mVolt               = COMPUTATION_DIGITAL_12BITS_TO_VOLTAGE(aADCxConvertedValues[5]);
+	  uhVrefInt_mVolt               = COMPUTATION_DIGITAL_12BITS_TO_VOLTAGE(aADCxConvertedValues[4]);
 	
 	  ubSequenceCompleted = RESET;
 	  ret= (int32_t)OPERATION_SUCCESS;
@@ -147,9 +145,6 @@ float ADC_Get_Voltage(void)
 	return (float)(uhVrefInt_mVolt)+VOLTAGE_OFFSET;
 }
 
-float ADC_Get_Temp(void)
-{
-	return wTemperature_DegreeCelsius+TEMP_OFFSET;
-}
+
 
 
