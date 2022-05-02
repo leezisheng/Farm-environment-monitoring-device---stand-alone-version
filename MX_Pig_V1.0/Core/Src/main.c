@@ -42,6 +42,8 @@
 #include "OLED.h"
 /* Through software operation GPIO and DTH11 for single-bus communication, initialization, data reading, etc */
 #include "DTH11.h"
+/* Control the buzzer tick and LED2 blink */
+#include "BUZZER.h"
 
 /* Header files associated with tasks and task operations */
 
@@ -66,6 +68,11 @@
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
 
+/* Select whether to use external modules : Used during program debugging */
+#define USE_ESP8266 	1
+#define USE_OLED     	0
+#define USE_DTH11     	0
+
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -73,9 +80,6 @@
 /* USER CODE BEGIN PV */
 extern __IO uint16_t   aADCxConvertedValues[ADCCONVERTEDVALUES_BUFFER_SIZE];
 extern uint8_t         ubSequenceCompleted;
-
-uint8_t temp = 0;
-uint8_t humi = 0;
 
 /* USER CODE END PV */
 
@@ -136,8 +140,7 @@ int main(void)
   
   while(1)
   {
-	DHT11_ReadData(&temp,&humi);   
-	HAL_Delay(500);
+	
   }
   /* USER CODE END 2 */
 
@@ -218,8 +221,16 @@ void SystemClock_Config(void)
 */
 int32_t BSP_Init(void)
 {
-	int32_t ret= (int32_t)OPERATION_SUCCESS;
+	static int32_t ret= (int32_t)OPERATION_SUCCESS;
 
+	/* ----------------------------LED Operation------------------------- */
+	/* Led blinks 5 times and buzzer work : BSP initialization is start */
+	for(int i=0;i<10;i++)
+	{
+		HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
+		HAL_Delay(100);
+	}
+	
 	/* ----------------------------ADC1 Operation------------------------- */
 	
 	/* Run the ADC calibration */  
@@ -244,15 +255,9 @@ int32_t BSP_Init(void)
 
 	/* The flag bit reset of ADC1 collection is complete */
 	ubSequenceCompleted = RESET;
-	
-	/* ----------------------------LED Operation------------------------- */
-	/* Led blinks 5 times: BSP initialization is in progress */
-	for(int i=0;i<3;i++)
-	{
-		HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
-		HAL_Delay(100);
-	}
   
+	
+	#if USE_ESP8266
 	/* ----------------------------ESP8266 Operation----------------------- */
 	/* ESP8266 initialization */
 	if (ESP8266_Init() != (uint8_t)OPERATION_SUCCESS)
@@ -260,7 +265,9 @@ int32_t BSP_Init(void)
 		Error_Handler();
 		ret= (int32_t)OPERATION_ERROR;
 	}
+	#endif
 	
+	#if USE_OLED
 	/* ----------------------------OLED Operation----------------------- */
 	
 	if (OLED_Init() != (uint8_t)OPERATION_SUCCESS)
@@ -268,13 +275,22 @@ int32_t BSP_Init(void)
 		Error_Handler();
 		ret= (int32_t)OPERATION_ERROR;
 	}
+	#endif
 	
+	#if USE_DTH11
 	/* ----------------------------DTH11 Operation----------------------- */
 	if (DHT11_Init() != (uint8_t)OPERATION_SUCCESS)
 	{
 		Error_Handler();
 		ret= (int32_t)OPERATION_ERROR;
 	}
+	#endif
+	
+	/* 
+	LED2 When the blinking interval and the buzzer work for five times, it indicates that the operation starts 
+	Indicates that the initialization of the peripheral is successful
+	*/
+	Buzzer_Work(10,(uint8_t)300);
   
     return ret;
 }
@@ -318,10 +334,7 @@ void Error_Handler(void)
   __disable_irq();
   while (1)
   {
-	  HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
-	  HAL_Delay(50);
-	  HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
-	  HAL_Delay(500);
+	  Buzzer_Work(10,(uint8_t)700);
   }
   /* USER CODE END Error_Handler_Debug */
 }
