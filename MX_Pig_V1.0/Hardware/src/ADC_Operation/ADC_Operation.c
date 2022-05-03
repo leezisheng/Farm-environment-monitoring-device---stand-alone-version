@@ -120,9 +120,9 @@ int32_t ADC_Get_Gas(void)
 	return ret;
 }
 
-float ADC_Get_Ozone(void)
+float ADC_Get_NH3(void)
 {
-	return (float)(OZONE_CONCENTRATION_CAL((float)uhADCChannel_4_ToDAC_mVolt/1000));
+	return (float)(NH3_CONCENTRATION_CAL((float)uhADCChannel_4_ToDAC_mVolt/1000));
 }
 
 float ADC_Get_CO2(void)
@@ -142,7 +142,7 @@ float ADC_Get_H2S(void)
 
 float ADC_Get_Voltage(void)
 {
-	return (float)(uhVrefInt_mVolt)+VOLTAGE_OFFSET;
+	return (float)(uhVrefInt_mVolt)/1000+VOLTAGE_OFFSET;
 }
 
 

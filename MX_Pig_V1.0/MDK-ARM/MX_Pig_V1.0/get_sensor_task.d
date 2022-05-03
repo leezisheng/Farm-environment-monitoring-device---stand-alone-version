@@ -35,3 +35,5 @@ mx_pig_v1.0\get_sensor_task.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal
 mx_pig_v1.0\get_sensor_task.o: ..\Common\numtype.h
 mx_pig_v1.0\get_sensor_task.o: D:\Lee\MDK5\ARM\ARMCC\Bin\..\include\stdio.h
 mx_pig_v1.0\get_sensor_task.o: ..\Hardware\inc\ADC_Operation.h
+mx_pig_v1.0\get_sensor_task.o: ..\Hardware\inc\DTH11.h
+mx_pig_v1.0\get_sensor_task.o: ..\Hardware\inc\UART_Printf.h

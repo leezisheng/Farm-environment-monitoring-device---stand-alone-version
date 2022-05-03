@@ -21,7 +21,7 @@
 #define DELAY_COEFFICIENT   	( 5500000 )
 /* Manipulate GPIO macro definition */
 #define DTH11_Pin 				GPIO_PIN_2
-#define DTH11_GPIO_Port 		GPIOD
+#define DTH11_GPIO_Port 		GPIOC
 /* Operations related to DTH11 ports */
 #define DHT11_PIN_SET   		HAL_GPIO_WritePin(DTH11_GPIO_Port,DTH11_Pin,GPIO_PIN_SET)                                         
 #define DHT11_PIN_RESET 		HAL_GPIO_WritePin(DTH11_GPIO_Port,DTH11_Pin,GPIO_PIN_RESET)                                     
@@ -37,6 +37,10 @@ uint8_t DHT11_Init (void);
 uint8_t DHT11_ReadData(uint8_t *ptemp , uint8_t *phumi);
 /* Tests whether the microsecond delay is accurate */
 void Test_Delay_us(uint32_t us);
+/* Get the temperature value */
+uint8_t DTH11_GetTemp(void);
+/* Obtain humidity value */
+uint8_t DTH11_GetHumi(void);
 
 #ifdef __cplusplus
 }

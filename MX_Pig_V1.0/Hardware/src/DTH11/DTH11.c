@@ -8,15 +8,11 @@
   
 /* Includes ------------------------------------------------------------------*/
 #include "DTH11.h"
-
 /* External function declaration----------------------------------------------*/
-
 
 /* Private macro definitions--------------------------------------------------*/
 
-
 /* Global variable------------------------------------------------------------*/
-
 
 /* Static function definition-------------------------------------------------*/
 
@@ -136,6 +132,9 @@ uint8_t DHT11_Init (void)
 	DHT11_RST();
 
 	ret = Dht11_Check(); 
+	
+	/* The delay after DTH11 initialization is longer than 1s */ 
+	HAL_Delay(1000);
 
 	return ret;
 }
@@ -263,5 +262,35 @@ static void Delay_us(uint32_t us)
 	{
 		;
 	}
+}
+
+/** 
+* @description: Get the temperature value
+* @param  {void} 
+* @return {uint8_t}: temp value
+* @author: leeqingshui 
+*/
+uint8_t DTH11_GetTemp(void)
+{
+	uint8_t Temp = 0;
+	
+	DHT11_ReadData(&Temp,NULL);
+	
+	return Temp;
+}
+
+/** 
+* @description: Get the temperature value
+* @param  {void} 
+* @return {uint8_t}: humidity value
+* @author: leeqingshui 
+*/
+uint8_t DTH11_GetHumi(void)
+{
+	uint8_t Humi = 0;
+	
+	DHT11_ReadData(NULL,&Humi);
+	
+	return Humi;
 }
 

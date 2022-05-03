@@ -137,10 +137,14 @@ int main(void)
   {
 	  Error_Handler();
   }
+ 
+  Connct_aliyun_iot();
   
   while(1)
   {
-	
+	  Get_Sensor_Info();
+	  HAL_Delay(300);
+
   }
   /* USER CODE END 2 */
 
@@ -230,12 +234,14 @@ int32_t BSP_Init(void)
 		HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
 		HAL_Delay(100);
 	}
+	printf("LED init success\r\n");
 	
 	/* ----------------------------ADC1 Operation------------------------- */
 	
 	/* Run the ADC calibration */  
 	if (HAL_ADCEx_Calibration_Start(&hadc1) != HAL_OK)
 	{
+		printf("ADC init fail\r\n");
 		/* Calibration Error */
 		/* The program is abnormal, the LED lights flash, first for a short time and then for a long time, cycle   */
 		Error_Handler();
@@ -248,6 +254,7 @@ int32_t BSP_Init(void)
                           ADCCONVERTEDVALUES_BUFFER_SIZE
                          ) != HAL_OK)
 	{
+		printf("ADC DMA init fail\r\n");
 		/* Start Error */
 		Error_Handler();
 		ret= (int32_t)OPERATION_ERROR;
@@ -256,34 +263,46 @@ int32_t BSP_Init(void)
 	/* The flag bit reset of ADC1 collection is complete */
 	ubSequenceCompleted = RESET;
   
+	printf("ADC init success\r\n");
 	
 	#if USE_ESP8266
 	/* ----------------------------ESP8266 Operation----------------------- */
 	/* ESP8266 initialization */
 	if (ESP8266_Init() != (uint8_t)OPERATION_SUCCESS)
 	{
+		printf("ESP8266 init fail\r\n");
 		Error_Handler();
 		ret= (int32_t)OPERATION_ERROR;
 	}
-	#endif
+	printf("ESP8266 init success\r\n");
 	
+	#endif
+
 	#if USE_OLED
 	/* ----------------------------OLED Operation----------------------- */
 	
 	if (OLED_Init() != (uint8_t)OPERATION_SUCCESS)
 	{
+		printf("OLED init fail\r\n");
 		Error_Handler();
 		ret= (int32_t)OPERATION_ERROR;
 	}
+	printf("OLED init success\r\n");
 	#endif
 	
 	#if USE_DTH11
 	/* ----------------------------DTH11 Operation----------------------- */
 	if (DHT11_Init() != (uint8_t)OPERATION_SUCCESS)
 	{
+		printf("DTH11 init fail\r\n");
 		Error_Handler();
 		ret= (int32_t)OPERATION_ERROR;
 	}
+	printf("DTH11 init success\r\n");
+	
+	#else
+	DHT11_Init();
+	printf("DTH11 init success\r\n");
 	#endif
 	
 	/* 
@@ -309,10 +328,12 @@ int32_t BSP_Init(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   /* USER CODE BEGIN Callback 0 */
+	
   if (htim->Instance == TIM3) 
   {
-//	  HAL_GPIO_TogglePin(ESP8266_RST_GPIO_Port,ESP8266_RST_Pin);
+	
   }
+  
   /* USER CODE END Callback 0 */
   if (htim->Instance == TIM1) {
     HAL_IncTick();

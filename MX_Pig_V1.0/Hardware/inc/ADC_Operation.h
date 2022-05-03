@@ -115,13 +115,13 @@
 
 /* Gas sensor output voltage and concentration fitting curve default macro parameters */
 
-/* Ozone gas coefficient macro definition */
-#define OZONE_COEFFICIENT_4 173.2
-#define OZONE_COEFFICIENT_3 -2223.1
-#define OZONE_COEFFICIENT_2 10611
-#define OZONE_COEFFICIENT_1 -22446
-#define OZONE_COEFFICIENT_0 17964
-#define OZONE_DIVISOR       6700
+/* NH3 gas coefficient macro definition */
+#define NH3_COEFFICIENT_4 173.2
+#define NH3_COEFFICIENT_3 -2223.1
+#define NH3_COEFFICIENT_2 10611
+#define NH3_COEFFICIENT_1 -22446
+#define NH3_COEFFICIENT_0 17964
+#define NH3_DIVISOR       6700
 
 /* carbon dioxide gas coefficient macro definition */
 #define CO2_COEFFICIENT_4 156.6
@@ -152,8 +152,8 @@
 
 /* Gas sensor output voltage and concentration fitting curve default macro function */
 
-/* Ozone concentration calculation macro function */
-#define OZONE_CONCENTRATION_CAL(x) (((x)*(x)*(x)*(x)*(OZONE_COEFFICIENT_4)+(x)*(x)*(x)*(OZONE_COEFFICIENT_3)+(x)*(x)*(OZONE_COEFFICIENT_2)+(x)*(OZONE_COEFFICIENT_1)+OZONE_COEFFICIENT_0)/OZONE_DIVISOR)
+/* NH3 concentration calculation macro function */
+#define NH3_CONCENTRATION_CAL(x) (((x)*(x)*(x)*(x)*(NH3_COEFFICIENT_4)+(x)*(x)*(x)*(NH3_COEFFICIENT_3)+(x)*(x)*(NH3_COEFFICIENT_2)+(x)*(NH3_COEFFICIENT_1)+NH3_COEFFICIENT_0)/NH3_DIVISOR)
 
 /* carbon dioxide concentration calculation macro function */
 #define CO2_CONCENTRATION_CAL(x) (((x)*(x)*(x)*(x)*(CO2_COEFFICIENT_4)+(x)*(x)*(x)*(CO2_COEFFICIENT_3)+(x)*(x)*(CO2_COEFFICIENT_2)+(x)*(CO2_COEFFICIENT_1)+CO2_COEFFICIENT_0)/CO2_DIVISOR)
@@ -164,21 +164,15 @@
 /* hydrogen sulfide concentration calculation macro function */
 #define H2S_CONCENTRATION_CAL(x) (((x)*(x)*(x)*(x)*(H2S_COEFFICIENT_4)+(x)*(x)*(x)*(H2S_COEFFICIENT_3)+(x)*(x)*(H2S_COEFFICIENT_2)+(x)*(H2S_COEFFICIENT_1)+H2S_COEFFICIENT_0)/H2S_DIVISOR)
   
-  
-  
 /* Extern Variable------------------------------------------------------------*/
 extern __IO uint16_t   aADCxConvertedValues[ADCCONVERTEDVALUES_BUFFER_SIZE];
 extern uint8_t         ubSequenceCompleted;
 
-
-
 /* Data structure declaration-------------------------------------------------*/
-
-
 
 /* Function declaration-------------------------------------------------------*/
 int32_t  ADC_Get_Gas(void);
-float    ADC_Get_Ozone(void);
+float    ADC_Get_NH3(void);
 float    ADC_Get_CO2(void);
 float    ADC_Get_CO(void);
 float    ADC_Get_H2S(void);

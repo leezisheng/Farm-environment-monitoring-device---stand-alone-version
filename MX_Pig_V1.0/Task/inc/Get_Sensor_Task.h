@@ -17,11 +17,28 @@
 
 /* Common macro definitions---------------------------------------------------*/
 
-
-
 /* Data structure declaration-------------------------------------------------*/
+/* Sensor information structure */
+typedef struct 
+{
+	/* Gas concentration */
+	float NH3_CC;
+	float H2S_CC;
+	float CO_CC;
+	float CO2_CC;
+	
+	/* Equipment voltage */
+	float Device_V;
+	
+	/* Indoor temperature and humidity */
+	uint8_t Temp;
+	uint8_t Humi;
+	
+}SENSOR_Information_Struct;
 
 /* Function declaration-------------------------------------------------------*/
+/* Update the value of the sensor obtained */
+uint8_t Get_Sensor_Info(void);
 
 
 #ifdef __cplusplus
