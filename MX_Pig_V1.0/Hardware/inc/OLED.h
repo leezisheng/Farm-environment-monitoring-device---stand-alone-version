@@ -22,11 +22,16 @@
 /* Common macro definitions---------------------------------------------------*/
 
 /* I2C address of OLED (do not modify) */
-#define OLED0561_ADD	0x78 
+#define OLED0561_ADD			0x78 
 /* OLED instruction (no modification) */
-#define COM				0x00
+#define COM						0x00
 /* OLED data (no modification) */
-#define DAT 			0x40 
+#define DAT 					0x40 
+/* OLED pin macro definition */
+#define OLED_SCK_Pin 			GPIO_PIN_6
+#define OLED_SCK_GPIO_Port 		GPIOB
+#define OLED_SDA_Pin 			GPIO_PIN_7
+#define OLED_SDA_GPIO_Port 		GPIOB
 
 /* Data structure declaration-------------------------------------------------*/
 

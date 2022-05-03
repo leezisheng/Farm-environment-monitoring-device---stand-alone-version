@@ -95,7 +95,6 @@ static uint8_t Dht11_Check(void)
 	// Set the working mode of the DTH11 port to input mode
 	DHT11_IO_IN();
 	
-	
 	// DHT11 will drop 40~80us
 	while (DHT11_READ_IO && retry<100)
 	{

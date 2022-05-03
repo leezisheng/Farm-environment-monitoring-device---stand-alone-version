@@ -70,7 +70,7 @@
 
 /* Select whether to use external modules : Used during program debugging */
 #define USE_ESP8266 	1
-#define USE_OLED     	0
+#define USE_OLED     	1
 #define USE_DTH11     	0
 
 /* USER CODE END PM */
@@ -102,7 +102,7 @@ void MX_FREERTOS_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -133,18 +133,33 @@ int main(void)
   /* USER CODE BEGIN 2 */
   
   /* Operations related to peripherals after initialization  */
-  if(BSP_Init()!=(int32_t)OPERATION_SUCCESS)
+  ret = BSP_Init();
+  if(ret!=(int32_t)OPERATION_SUCCESS)
   {
+	  Display_Operation_Status("BSP init :" ,ret);
 	  Error_Handler();
   }
+  Display_Operation_Status("BSP init :" ,ret);
+  HAL_Delay(1000);
+  OLED_CLS();
  
-  Connct_aliyun_iot();
+  OLED_ShowStr(20, 0, "start connect iot", 1);
+  OLED_ShowStr(2, 2, "please wait 10s", 1);
+  ret = Connct_aliyun_iot();
+  if(ret!=(int32_t)OPERATION_SUCCESS)
+  {
+	  Display_Operation_Status("Connect iot platform :" ,ret);
+	  Error_Handler();
+  }
+  Display_Operation_Status("Connect iot platform :" ,ret);
+  HAL_Delay(1000);
+  OLED_CLS();
+  
+  
   
   while(1)
   {
-	  Get_Sensor_Info();
-	  HAL_Delay(300);
-
+	  Send_Heart_Server();
   }
   /* USER CODE END 2 */
 
@@ -162,6 +177,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
   }
+  return ret;
   /* USER CODE END 3 */
 }
 
@@ -232,22 +248,39 @@ int32_t BSP_Init(void)
 	for(int i=0;i<10;i++)
 	{
 		HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
-		HAL_Delay(100);
+		HAL_Delay(50);
 	}
 	printf("LED init success\r\n");
 	
-	/* ----------------------------ADC1 Operation------------------------- */
+	#if USE_OLED
+	/* ----------------------------OLED Operation----------------------- */
+	/* The OLED screen is initialized */
+	if (OLED_Init() != (uint8_t)OPERATION_SUCCESS)
+	{
+		printf("OLED init fail\r\n");
+		Error_Handler();
+		ret= (int32_t)OPERATION_ERROR;
+	}
 	
+	printf("OLED init success\r\n");
+	/* The OLED screen prompts initialization to begin */
+	OLED_ShowStr(30, 0, "start BSP init", 1);
+	OLED_ShowStr(5, 1, "OLED init success", 1);
+	
+	#endif
+	
+	/* ----------------------------ADC1 Operation------------------------- */
 	/* Run the ADC calibration */  
 	if (HAL_ADCEx_Calibration_Start(&hadc1) != HAL_OK)
 	{
 		printf("ADC init fail\r\n");
+		OLED_ShowStr(5, 2, "ADC init fail", 1);
 		/* Calibration Error */
 		/* The program is abnormal, the LED lights flash, first for a short time and then for a long time, cycle   */
 		Error_Handler();
 		ret= (int32_t)OPERATION_ERROR;
 	}
-	
+
 	/* Start ADC conversion on regular group with transfer by DMA */
 	if (HAL_ADC_Start_DMA(&hadc1,
 						  (uint32_t *)aADCxConvertedValues,
@@ -255,6 +288,7 @@ int32_t BSP_Init(void)
                          ) != HAL_OK)
 	{
 		printf("ADC DMA init fail\r\n");
+		OLED_ShowStr(5, 2, "ADC DMA init fail", 1);	
 		/* Start Error */
 		Error_Handler();
 		ret= (int32_t)OPERATION_ERROR;
@@ -264,6 +298,7 @@ int32_t BSP_Init(void)
 	ubSequenceCompleted = RESET;
   
 	printf("ADC init success\r\n");
+	OLED_ShowStr(5, 2, "ADC init success", 1);
 	
 	#if USE_ESP8266
 	/* ----------------------------ESP8266 Operation----------------------- */
@@ -271,23 +306,15 @@ int32_t BSP_Init(void)
 	if (ESP8266_Init() != (uint8_t)OPERATION_SUCCESS)
 	{
 		printf("ESP8266 init fail\r\n");
+		
+		OLED_ShowStr(5, 3, "esp8266 init fail", 1);
+		
 		Error_Handler();
 		ret= (int32_t)OPERATION_ERROR;
 	}
 	printf("ESP8266 init success\r\n");
+	OLED_ShowStr(5, 3, "esp8266 init success", 1);
 	
-	#endif
-
-	#if USE_OLED
-	/* ----------------------------OLED Operation----------------------- */
-	
-	if (OLED_Init() != (uint8_t)OPERATION_SUCCESS)
-	{
-		printf("OLED init fail\r\n");
-		Error_Handler();
-		ret= (int32_t)OPERATION_ERROR;
-	}
-	printf("OLED init success\r\n");
 	#endif
 	
 	#if USE_DTH11
@@ -295,14 +322,21 @@ int32_t BSP_Init(void)
 	if (DHT11_Init() != (uint8_t)OPERATION_SUCCESS)
 	{
 		printf("DTH11 init fail\r\n");
+		OLED_ShowStr(5, 4, "DTH11 init fail", 1);
+	
 		Error_Handler();
 		ret= (int32_t)OPERATION_ERROR;
 	}
 	printf("DTH11 init success\r\n");
+
+	OLED_ShowStr(5, 4, "DTH11 init success", 1);
 	
 	#else
 	DHT11_Init();
 	printf("DTH11 init success\r\n");
+	OLED_ShowStr(5, 4, "DTH11 init success", 1);
+	OLED_CLS();
+
 	#endif
 	
 	/* 
@@ -352,10 +386,10 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
-  __disable_irq();
   while (1)
   {
 	  Buzzer_Work(10,(uint8_t)700);
+	  Buzzer_Work(10,(uint8_t)2000);
   }
   /* USER CODE END Error_Handler_Debug */
 }

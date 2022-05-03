@@ -9,18 +9,14 @@
 /* Includes ------------------------------------------------------------------*/
 #include "OLED.h"
 #include "i2c.h"
-
 /* Font header file */
 #include "ASCII.h"
 
 /* External function declaration----------------------------------------------*/
 
-
 /* Private macro definitions--------------------------------------------------*/
 
-
 /* Global variable------------------------------------------------------------*/
-
 
 /* Static function definition-------------------------------------------------*/
 static uint32_t oled_pow(uint8_t m,uint8_t n);
@@ -107,7 +103,13 @@ uint8_t OLED_Init(void)
 			WriteCmd(0x8d)		&& 	//--set DC-DC enable
 			WriteCmd(0x14)		&& 	//
 			WriteCmd(0xaf);		    //--turn on oled panel
-			
+	
+	ret = OLED_OFF() && ret;
+	
+	ret = OLED_CLS() && ret;
+	
+	ret = OLED_ON() && ret;
+
 	return ret;
 }
 
@@ -211,7 +213,6 @@ uint8_t OLED_OFF(void)
 * @return {uint8_t  }           : if success,return (uint8_t)OPERATION_SUCCESS
 * @author: leeqingshui 
 */
-
 uint8_t OLED_ShowStr(uint8_t x, uint8_t y, uint8_t ch[], uint8_t TextSize)
 {
 	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
@@ -305,7 +306,7 @@ uint8_t OLED_ShowChar(uint8_t x, uint8_t y, uint8_t chr, uint8_t Char_Size)
 	
 	switch( Char_Size )
 	{
-		case 1 :	
+		case 2 :	
 		{
 			ret = OLED_SetPos(x,y) && ret;	
 			
@@ -318,7 +319,7 @@ uint8_t OLED_ShowChar(uint8_t x, uint8_t y, uint8_t chr, uint8_t Char_Size)
 				ret = WriteDat(F8X16[c*16+i+8]) && ret;
 		}break;
 		
-		case 2 :
+		case 1 :
 		{
 			ret = OLED_SetPos(x,y) && ret;
 			

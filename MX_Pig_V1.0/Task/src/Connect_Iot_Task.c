@@ -13,12 +13,11 @@
 #include "OLED.h"
 /* External function declaration----------------------------------------------*/
 
-
 /* Private macro definitions--------------------------------------------------*/
 
-
 /* Global variable------------------------------------------------------------*/
-
+/* Network Connection Status */
+Internat_Connect_Information_Struct Connect_Status_Stucrt = {0};
 
 /* Static function definition-------------------------------------------------*/
 
@@ -92,12 +91,92 @@ uint8_t Connct_aliyun_iot(void)
 		return ret;
 	}
 	
+    /* Connect to the specified MQTT server */
+	if(ESP8266_MQTTSUB(PROPERTY_SET) != (uint8_t)OPERATION_SUCCESS)
+	{
+		ret = (uint8_t)OPERATION_ERROR;
+		return ret;
+	}
+	
 	printf("The cloud platform is successfully connected\r\n");
 	
 	return ret;
 }
 
+/** 
+* @description: Gets the network connection status
+* @param  {void} 
+* @return {uint8_t } : if success,return (uint8_t)OPERATION_SUCCESS
+* @author: leeqingshui 
+*/
+uint8_t Get_InternetLink_Status(void)
+{
+	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
+
+	Connect_Status_Stucrt.Internet_Link_Status = ESP8266_Get_LinkStatus ();
+	
+	if(Connect_Status_Stucrt.Internet_Link_Status>4)
+	{
+		ret = (uint8_t)OPERATION_ERROR;
+	}
+	
+	return ret;
+}
+
+/** 
+* @description: Gets the MQTT connection server status
+* @param  {void} 
+* @return {uint8_t } : if success,return (uint8_t)OPERATION_SUCCESS
+* @author: leeqingshui 
+*/
+uint8_t Get_ServerLink_Status(void)
+{
+	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
+
+	Connect_Status_Stucrt.MQTTS_Link_tatus = ESP8266_Get_MQTTStatus ();
+	
+	if(Connect_Status_Stucrt.MQTTS_Link_tatus>6)
+	{
+		ret = (uint8_t)OPERATION_ERROR;
+	}
+	
+	return ret;
+}
+
+/** 
+* @description: Upload data to the server
+* @param  {uint32_t} message_id
+* @param  {char *}   data_type
+* @param  {void*}    data
+* @return {uint8_t } : if success,return (uint8_t)OPERATION_SUCCESS
+* @author: leeqingshui 
+*/
+uint8_t UploadData_To_Server(uint32_t message_id, char * data_type, void*  data)
+{
+	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
+	
+    char mqtt_message[128];
+	
+
+	
+	ret = ESP8266_MQTTPUB(PROPERTY_POST,mqtt_message);
 
 
+	return ret;
+}
 
+/** 
+* @description: Fixed heartbeat packets are sent to the server
+* @param  {char *} str : String information
+* @return {uint8_t } : if success,return (uint8_t)OPERATION_SUCCESS
+* @author: leeqingshui 
+*/
+__weak uint8_t Send_Heart_Server(void)
+{
+	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
+
+	ret = ESP8266_Send_Heart();
+
+	return ret;
+}
 

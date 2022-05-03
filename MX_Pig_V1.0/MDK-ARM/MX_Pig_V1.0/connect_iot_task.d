@@ -34,6 +34,7 @@ mx_pig_v1.0\connect_iot_task.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ha
 mx_pig_v1.0\connect_iot_task.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 mx_pig_v1.0\connect_iot_task.o: ..\Common\numtype.h
 mx_pig_v1.0\connect_iot_task.o: D:\Lee\MDK5\ARM\ARMCC\Bin\..\include\stdio.h
+mx_pig_v1.0\connect_iot_task.o: ..\Task\inc\Connect_Iot_Task.h
 mx_pig_v1.0\connect_iot_task.o: ..\Hardware\inc\ESP8266.h
 mx_pig_v1.0\connect_iot_task.o: ..\Hardware\inc\UART_Printf.h
 mx_pig_v1.0\connect_iot_task.o: ..\Hardware\inc\OLED.h

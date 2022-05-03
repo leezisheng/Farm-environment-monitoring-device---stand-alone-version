@@ -34,4 +34,9 @@ mx_pig_v1.0\display_data_task.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_h
 mx_pig_v1.0\display_data_task.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 mx_pig_v1.0\display_data_task.o: ..\Common\numtype.h
 mx_pig_v1.0\display_data_task.o: D:\Lee\MDK5\ARM\ARMCC\Bin\..\include\stdio.h
+mx_pig_v1.0\display_data_task.o: ..\Task\inc\Connect_Iot_Task.h
+mx_pig_v1.0\display_data_task.o: ..\Task\inc\Connect_Iot_Task.h
+mx_pig_v1.0\display_data_task.o: ..\Task\inc\Get_Sensor_Task.h
 mx_pig_v1.0\display_data_task.o: ..\Hardware\inc\OLED.h
+mx_pig_v1.0\display_data_task.o: ..\Hardware\inc\UART_Printf.h
+mx_pig_v1.0\display_data_task.o: D:\Lee\MDK5\ARM\ARMCC\Bin\..\include\math.h

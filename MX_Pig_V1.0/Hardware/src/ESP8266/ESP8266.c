@@ -543,8 +543,6 @@ __weak uint8_t ESP8266_MQTTSETCLIENTID( char * p_Generate_Client_Id )
 	return ret;
 }
 
-
-
 /** 
 * @description: Connect to the specified MQTT server
 * @param   {char *     } Ip        : IP address
@@ -684,6 +682,73 @@ __weak uint8_t MQTT_SendString(char * pTopic,char *temp)
 	return ret;
 }
 
+/** 
+* @description: ESP8266 detects the MQTT connection status
+* @param   {void}  
+* @return  {uint8_t}:
+*          0        : The connection is not initialized
+*          2        : Has been set MQTTCONNCFG
+*          3        : Connection disconnected
+*          4        : Established connection
+*          5        : Connected, but not subscribed to topic
+*          6        : Already connected and subscribed to topic
+* @author: leeqingshui 
+*/
+uint8_t ESP8266_Get_MQTTStatus ( void )
+{
+	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
+
+	/*
+	AT+MQTTCONN?
+	
+	State: indicates the current status of the MQTT. The status is described as follows:
+		0: the connection is not initialized
+		1: MQTTUSERCFG has been set
+		2: MQTTCONNCFG has been configured
+		3: The connection is disconnected
+		4: The connection has been established
+		5: Connected but not subscribed to topic
+		6: Connected and subscribed to topic
+	*/
+	if ( ESP8266_Send_AT_Cmd( "AT+MQTTCONN?", "OK", 0, 500 ) )
+	{
+		if ( strstr ( ESP8266_Fram_Record_Struct .Data_RX_BUF, "STATUS:0\r\n" ) )
+            return (uint8_t)0;
+
+        else if ( strstr ( ESP8266_Fram_Record_Struct .Data_RX_BUF, "STATUS:2\r\n" ) )
+			return (uint8_t)2;
+
+        else if ( strstr ( ESP8266_Fram_Record_Struct .Data_RX_BUF, "STATUS:3\r\n" ) )
+            return (uint8_t)3;       
+		 
+		else if ( strstr ( ESP8266_Fram_Record_Struct .Data_RX_BUF, "STATUS:4\r\n" ) )
+			return (uint8_t)4;
+
+        else if ( strstr ( ESP8266_Fram_Record_Struct .Data_RX_BUF, "STATUS:5\r\n" ) )
+            return (uint8_t)5; 
+		
+		else if ( strstr ( ESP8266_Fram_Record_Struct .Data_RX_BUF, "STATUS:6\r\n" ) )
+			return (uint8_t)6;	
+	}
+
+	return ret;
+}
+
+/** 
+* @description: The MQTT sends heartbeat packets to maintain the connection
+* @param   {void}  
+* @return  {uint8_t}:if success,return (uint8_t)OPERATION_SUCCESS
+* @author: leeqingshui 
+*/
+uint8_t ESP8266_Send_Heart( void )
+{
+	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
+
+	ESP8266_USART("%d%d",0xc0,0x00);
+	
+	return ret;
+}
+
 /*++++++++++++++++++++++++++++++++++++++++++++++++++Static functions++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 /** 
@@ -726,7 +791,6 @@ static uint8_t Cmd_UART1_IT(void)
 	
 	return ret;
 }
-
  
 /** 
 * @description: Serial port 1 interrupts callback function

@@ -28,10 +28,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
+#include "Connect_Iot_Task.h"
 /* Common macro definitions---------------------------------------------------*/
-
-/* Serial port 1 macro definitions */
 
 /* WIFI Parameter Setting */
 /* The name of the WIFI  */
@@ -59,6 +57,10 @@
 #define MQTT_Server_Topic  				"topic"    
 /* Client ID */
 #define CLIENT_ID						"123456"
+/* Event reporting */
+#define EVENT_ID                         "NULL"
+/* Service invocation */
+#define SERVER_ID                        "NULL"
 
 /* TCP protocol Parameters */
 /* Server IP Address */
@@ -71,17 +73,51 @@
 #define DEVICE_SECRET     				"e6d45170fa27bfebbed1d86324362a81"
 #define PRODUCT_KEY 					"h5fb4XQhOoD"
 
+/* MQTT server parameters */
+/* Property setting macro definition : /sys/h5fb4XQhOoD/${deviceName}/thing/service/property/set */
+#define PROPERTY_SET					"/sys/h5fb4XQhOoD/"##DEVICE_NAME##"/thing/service/property/set"
+
+/* 	Property to report macro definition : 
+	/sys/h5fb4XQhOoD/${deviceName}/thing/event/property/post 
+	/sys/h5fb4XQhOoD/${deviceName}/thing/event/property/post_reply
+*/
+#define PROPERTY_POST					"/sys/h5fb4XQhOoD/"##DEVICE_NAME##"/thing/event/property/post"
+#define PROPERTY_POST_REPLY				"/sys/h5fb4XQhOoD/"##DEVICE_NAME##"/thing/event/property/post_reply"
+
+/*	Event reporting macro definition
+	/sys/h5fb4XQhOoD/${deviceName}/thing/event/${tsl.event.identifier}/post
+	/sys/h5fb4XQhOoD/${deviceName}/thing/event/${tsl.event.identifier}/post_reply
+*/
+#define EVENT_POST						"/sys/h5fb4XQhOoD/"##DEVICE_NAME##"/thing/event/"##EVENT_ID##"/post"
+#define EVENT_POST_REPLY				"/sys/h5fb4XQhOoD/"##DEVICE_NAME##"/thing/event/"##EVENT_ID##"/post_reply"
+
+/*	Service invocation macro definition
+	/sys/h5fb4XQhOoD/${deviceName}/thing/service/${tsl.service.identifier}
+	/sys/h5fb4XQhOoD/${deviceName}/thing/service/${tsl.service.identifier}_reply
+*/
+#define SERVER_POST						"/sys/h5fb4XQhOoD/"##DEVICE_NAME##"/thing/service/"SERVER_ID
+#define SERVER_POST_REPLY				"/sys/h5fb4XQhOoD/"##DEVICE_NAME##"/thing/service/"SERVER_ID"_reply"
 
 /* Data structure declaration-------------------------------------------------*/
 
-
+/* Network and server connection status */
+typedef struct 
+{
+	uint8_t Internet_Link_Status;
+	uint8_t MQTTS_Link_tatus;
+}Internat_Connect_Information_Struct;
 
 /* Function declaration-------------------------------------------------------*/
 /* Use at-MQTT instructions to connect ali Cloud platform */
 uint8_t Connct_aliyun_iot(void);
-
-
-
+/* Gets the network connection status */
+uint8_t Get_InternetLink_Status(void);
+/* Gets the MQTT connection server status */
+uint8_t Get_ServerLink_Status(void);
+/* Upload data to the server */
+uint8_t UploadData_To_Server(uint32_t message_id,char * data_type,void* data);
+/* Fixed heartbeat packets are sent to the server */
+uint8_t Send_Heart_Server(void);
 
 #ifdef __cplusplus
 }

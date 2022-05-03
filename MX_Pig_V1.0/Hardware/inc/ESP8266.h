@@ -135,7 +135,6 @@ uint8_t ESP8266_ExitUnvarnishSend ( void );
 /* The ESP8266 detects the network connection status */
 uint8_t ESP8266_Get_LinkStatus ( void );
 
-
 /* Functions related to the MQTT instruction */
 
 /* MQTT configures user attributes */
@@ -152,6 +151,10 @@ uint8_t ESP8266_MQTTPUB( char * Topic,char *temp);
 uint8_t ESP8266_MQTTCLEAN(void);
 /* ESP8266 Sends a character string */
 uint8_t MQTT_SendString(char * pTopic,char *temp);
+/* ESP8266 detects the MQTT connection status */
+uint8_t ESP8266_Get_MQTTStatus ( void );
+/* The MQTT sends heartbeat packets to maintain the connection */
+uint8_t ESP8266_Send_Heart( void );
 
 #ifdef __cplusplus
 }
