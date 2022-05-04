@@ -145,6 +145,18 @@ int main(void)
  
   OLED_ShowStr(20, 0, "start connect iot", 1);
   OLED_ShowStr(2, 2, "please wait 10s", 1);
+  /*
+  AT+RST
+  AT+RESTORE
+  AT+CWMODE=1
+  AT+CWJAP="CMCC-y36J","DE3e5SLL"
+  AT+CIPSNTPCFG=1,8,"cn.ntp.org.cn","ntp.sjtu.edu.cn","us.pool.ntp.org"
+  AT+MQTTUSERCFG=0,1,"NULL","test_0&h5fb4XQhOoD","B210DD9F749288AE7F8A485F0ABA0C0C05677A91",0,0,""
+  AT+MQTTCLIENTID=0,"123456|securemode=3\,signmethod=hmacsha1|"
+  AT+MQTTCONN=0,"h5fb4XQhOoD.iot-as-mqtt.cn-shanghai.aliyuncs.com",1883,1
+  AT+MQTTSUB=0,"/sys/h5fb4XQhOoD/test_0/thing/service/property/set",1
+  AT+MQTTPUB=0,"/sys/h5fb4XQhOoD/test_0/thing/event/property/post","{\"method\":\"thing.event.property.post\",\"id\":\"0000000001\"\,\"params\":{\"co\":2.0},\"version\":\"1.0.0\"}",1,0
+  */
   ret = Connct_aliyun_iot();
   if(ret!=(int32_t)OPERATION_SUCCESS)
   {
@@ -156,10 +168,10 @@ int main(void)
   OLED_CLS();
   
   
-  
   while(1)
   {
-	  Send_Heart_Server();
+	  UploadData_To_Server();
+	  HAL_Delay(3000);
   }
   /* USER CODE END 2 */
 
@@ -177,7 +189,6 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
   }
-  return ret;
   /* USER CODE END 3 */
 }
 

@@ -619,7 +619,7 @@ __weak uint8_t ESP8266_MQTTPUB( char * Topic,char *temp)
 {
 	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
 	
-	char cCmd [120];
+	char cCmd [512];
 	
 	/*
 	AT+MQTTPUB=<LinkID>,<"topic">,<"data">,<qos>,<retain>

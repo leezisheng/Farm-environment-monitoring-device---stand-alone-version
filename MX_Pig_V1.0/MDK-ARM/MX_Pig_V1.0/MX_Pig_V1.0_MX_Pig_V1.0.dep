@@ -1,6 +1,6 @@
 Dependencies for Project 'MX_Pig_V1.0', Target 'MX_Pig_V1.0': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
-F (../Core/Src/main.c)(0x6271AF6E)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\Common -I ..\Hardware\inc -I ..\Task\inc-I.\RTE\_MX_Pig_V1.0-ID:\Lee\MDK5\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Lee\MDK5\Keil\STM32F1xx_DFP\1.0.5\Device\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o mx_pig_v1.0\main.o --omf_browse mx_pig_v1.0\main.crf --depend mx_pig_v1.0\main.d)
+F (../Core/Src/main.c)(0x6272D3BA)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\Common -I ..\Hardware\inc -I ..\Task\inc-I.\RTE\_MX_Pig_V1.0-ID:\Lee\MDK5\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Lee\MDK5\Keil\STM32F1xx_DFP\1.0.5\Device\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o mx_pig_v1.0\main.o --omf_browse mx_pig_v1.0\main.crf --depend mx_pig_v1.0\main.d)
 I (../Core/Inc/main.h)(0x62716038)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x627107C4)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x62716038)
@@ -61,7 +61,7 @@ I (..\Hardware\inc\OLED.h)(0x62716281)
 I (..\Hardware\inc\DTH11.h)(0x627109FE)
 I (..\Hardware\inc\BUZZER.h)(0x626FEA66)
 I (..\Task\inc\Display_Data_Task.h)(0x62718C5B)
-I (..\Task\inc\Connect_Iot_Task.h)(0x6271B415)
+I (..\Task\inc\Connect_Iot_Task.h)(0x6272AB86)
 I (..\Task\inc\Get_Sensor_Task.h)(0x6270EDE1)
 F (../Core/Src/gpio.c)(0x62716036)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\Common -I ..\Hardware\inc -I ..\Task\inc-I.\RTE\_MX_Pig_V1.0-ID:\Lee\MDK5\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Lee\MDK5\Keil\STM32F1xx_DFP\1.0.5\Device\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o mx_pig_v1.0\gpio.o --omf_browse mx_pig_v1.0\gpio.crf --depend mx_pig_v1.0\gpio.d)
 I (../Core/Inc/gpio.h)(0x62716036)
@@ -1164,7 +1164,7 @@ I (D:\Lee\MDK5\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (../Core/Inc/usart.h)(0x62716037)
 I (D:\Lee\MDK5\ARM\ARMCC\include\stdarg.h)(0x60252376)
 I (D:\Lee\MDK5\ARM\ARMCC\include\string.h)(0x6025237E)
-F (..\Hardware\src\ESP8266\ESP8266.c)(0x6271AF6E)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\Common -I ..\Hardware\inc -I ..\Task\inc-I.\RTE\_MX_Pig_V1.0-ID:\Lee\MDK5\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Lee\MDK5\Keil\STM32F1xx_DFP\1.0.5\Device\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o mx_pig_v1.0\esp8266.o --omf_browse mx_pig_v1.0\esp8266.crf --depend mx_pig_v1.0\esp8266.d)
+F (..\Hardware\src\ESP8266\ESP8266.c)(0x6272AF9F)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\Common -I ..\Hardware\inc -I ..\Task\inc-I.\RTE\_MX_Pig_V1.0-ID:\Lee\MDK5\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Lee\MDK5\Keil\STM32F1xx_DFP\1.0.5\Device\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o mx_pig_v1.0\esp8266.o --omf_browse mx_pig_v1.0\esp8266.crf --depend mx_pig_v1.0\esp8266.d)
 I (..\Hardware\inc\ESP8266.h)(0x6271AC8D)
 I (../Core/Inc/main.h)(0x62716038)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x627107C4)
@@ -1384,7 +1384,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x627107C4)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x62567938)
 I (..\Common\numtype.h)(0x626ADACA)
 I (D:\Lee\MDK5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (..\Task\inc\Connect_Iot_Task.h)(0x6271B415)
+I (..\Task\inc\Connect_Iot_Task.h)(0x6272AB86)
 I (..\Task\inc\Get_Sensor_Task.h)(0x6270EDE1)
 I (..\Hardware\inc\OLED.h)(0x62716281)
 I (..\Hardware\inc\UART_Printf.h)(0x626EC7F2)
@@ -1427,8 +1427,8 @@ I (D:\Lee\MDK5\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (..\Hardware\inc\ADC_Operation.h)(0x6270EF0A)
 I (..\Hardware\inc\DTH11.h)(0x627109FE)
 I (..\Hardware\inc\UART_Printf.h)(0x626EC7F2)
-F (..\Task\src\Connect_Iot_Task.c)(0x6271B415)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\Common -I ..\Hardware\inc -I ..\Task\inc-I.\RTE\_MX_Pig_V1.0-ID:\Lee\MDK5\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Lee\MDK5\Keil\STM32F1xx_DFP\1.0.5\Device\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o mx_pig_v1.0\connect_iot_task.o --omf_browse mx_pig_v1.0\connect_iot_task.crf --depend mx_pig_v1.0\connect_iot_task.d)
-I (..\Task\inc\Connect_Iot_Task.h)(0x6271B415)
+F (..\Task\src\Connect_Iot_Task.c)(0x6272D826)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\Common -I ..\Hardware\inc -I ..\Task\inc-I.\RTE\_MX_Pig_V1.0-ID:\Lee\MDK5\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Lee\MDK5\Keil\STM32F1xx_DFP\1.0.5\Device\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o mx_pig_v1.0\connect_iot_task.o --omf_browse mx_pig_v1.0\connect_iot_task.crf --depend mx_pig_v1.0\connect_iot_task.d)
+I (..\Task\inc\Connect_Iot_Task.h)(0x6272AB86)
 I (../Core/Inc/main.h)(0x62716038)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x627107C4)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x62716038)
@@ -1465,3 +1465,5 @@ I (D:\Lee\MDK5\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (..\Hardware\inc\ESP8266.h)(0x6271AC8D)
 I (..\Hardware\inc\UART_Printf.h)(0x626EC7F2)
 I (..\Hardware\inc\OLED.h)(0x62716281)
+I (..\Task\inc\Get_Sensor_Task.h)(0x6270EDE1)
+I (D:\Lee\MDK5\ARM\ARMCC\include\string.h)(0x6025237E)

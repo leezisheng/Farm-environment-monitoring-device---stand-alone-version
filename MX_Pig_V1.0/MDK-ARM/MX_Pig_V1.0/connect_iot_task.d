@@ -38,3 +38,5 @@ mx_pig_v1.0\connect_iot_task.o: ..\Task\inc\Connect_Iot_Task.h
 mx_pig_v1.0\connect_iot_task.o: ..\Hardware\inc\ESP8266.h
 mx_pig_v1.0\connect_iot_task.o: ..\Hardware\inc\UART_Printf.h
 mx_pig_v1.0\connect_iot_task.o: ..\Hardware\inc\OLED.h
+mx_pig_v1.0\connect_iot_task.o: ..\Task\inc\Get_Sensor_Task.h
+mx_pig_v1.0\connect_iot_task.o: D:\Lee\MDK5\ARM\ARMCC\Bin\..\include\string.h

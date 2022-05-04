@@ -28,17 +28,13 @@ Project File Date:  05/03/2022
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Lee\MDK5\ARM\ARMCC\Bin'
 Build target 'MX_Pig_V1.0'
 compiling Connect_Iot_Task.c...
-compiling Display_Data_Task.c...
-compiling main.c...
-../Core/Src/main.c(167): warning:  #111-D: statement is unreachable
-    MX_FREERTOS_Init();
-../Core/Src/main.c(180): warning:  #111-D: statement is unreachable
-    return ret;
-../Core/Src/main.c: 2 warnings, 0 errors
+..\Task\src\Connect_Iot_Task.c(162): warning:  #177-D: variable "mqtt_message"  was declared but never referenced
+      char mqtt_message[256];
+..\Task\src\Connect_Iot_Task.c: 1 warning, 0 errors
 linking...
-Program Size: Code=15604 RO-data=2364 RW-data=100 ZI-data=3068  
+Program Size: Code=15584 RO-data=2364 RW-data=100 ZI-data=3068  
 FromELF: creating hex file...
-"MX_Pig_V1.0\MX_Pig_V1.0" - 0 Error(s), 2 Warning(s).
+"MX_Pig_V1.0\MX_Pig_V1.0" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -62,7 +58,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.5.0
       Include file:  CMSIS\Core\Include\tz_context.h
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

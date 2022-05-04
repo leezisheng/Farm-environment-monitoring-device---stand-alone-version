@@ -115,7 +115,7 @@ uint8_t Get_InternetLink_Status(void);
 /* Gets the MQTT connection server status */
 uint8_t Get_ServerLink_Status(void);
 /* Upload data to the server */
-uint8_t UploadData_To_Server(uint32_t message_id,char * data_type,void* data);
+uint8_t UploadData_To_Server(void);
 /* Fixed heartbeat packets are sent to the server */
 uint8_t Send_Heart_Server(void);
 

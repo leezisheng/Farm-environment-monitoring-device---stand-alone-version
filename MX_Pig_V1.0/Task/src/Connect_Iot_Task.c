@@ -11,13 +11,19 @@
 #include "ESP8266.h"
 #include "UART_Printf.h"
 #include "OLED.h"
+#include "Get_Sensor_Task.h"
+
+#include <string.h>
 /* External function declaration----------------------------------------------*/
 
 /* Private macro definitions--------------------------------------------------*/
 
 /* Global variable------------------------------------------------------------*/
+
 /* Network Connection Status */
 Internat_Connect_Information_Struct Connect_Status_Stucrt = {0};
+/* Structure of sensor data to be reported */
+SENSOR_Information_Struct Upload_SensorDate_struct        = {0};
 
 /* Static function definition-------------------------------------------------*/
 
@@ -145,23 +151,29 @@ uint8_t Get_ServerLink_Status(void)
 
 /** 
 * @description: Upload data to the server
-* @param  {uint32_t} message_id
-* @param  {char *}   data_type
-* @param  {void*}    data
-* @return {uint8_t } : if success,return (uint8_t)OPERATION_SUCCESS
+* @param  {void   } 
+* @return {uint8_t} : if success,return (uint8_t)OPERATION_SUCCESS
 * @author: leeqingshui 
 */
-uint8_t UploadData_To_Server(uint32_t message_id, char * data_type, void*  data)
+__weak uint8_t UploadData_To_Server(void)
 {
 	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
 	
-    char mqtt_message[128];
+    char mqtt_message[256];
 	
 
 	
-	ret = ESP8266_MQTTPUB(PROPERTY_POST,mqtt_message);
-
-
+	
+	/*example :
+	sprintf(mqtt_message,"{\"method\":\"thing.event.property.post\",
+						   \"id\":\"0000000001\",
+						   \"params\":{\"RoomTemp\":%.2f},
+	                       \"version\":\"1.0.0\"}",temp);
+	*/
+	
+	
+	
+	
 	return ret;
 }
 
