@@ -153,37 +153,47 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Sensor_Info_Struct.NH3_CC</ItemText>
+          <ItemText>is_connect_iot</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Sensor_Info_Struct.H2S_CC</ItemText>
+          <ItemText>OLED_Display_struct.sensor_info_struct.CO2_CC</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Sensor_Info_Struct.CO_CC </ItemText>
+          <ItemText>OLED_Display_struct.sensor_info_struct.CO_CC</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Sensor_Info_Struct.CO2_CC</ItemText>
+          <ItemText>OLED_Display_struct.sensor_info_struct.H2S_CC</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Sensor_Info_Struct.Device_V</ItemText>
+          <ItemText>OLED_Display_struct.sensor_info_struct.NH3_CC</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Sensor_Info_Struct.Temp</ItemText>
+          <ItemText>OLED_Display_struct.sensor_info_struct.Humi</ItemText>
         </Ww>
         <Ww>
           <count>6</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Sensor_Info_Struct.Humi</ItemText>
+          <ItemText>OLED_Display_struct.sensor_info_struct.Temp</ItemText>
+        </Ww>
+        <Ww>
+          <count>7</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>OLED_Display_struct.internect_status_struct.Internet_Link_Status</ItemText>
+        </Ww>
+        <Ww>
+          <count>8</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>OLED_Display_struct.internect_status_struct.MQTTS_Link_tatus</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>

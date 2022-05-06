@@ -118,6 +118,8 @@ uint8_t Get_ServerLink_Status(void);
 uint8_t UploadData_To_Server(void);
 /* Fixed heartbeat packets are sent to the server */
 uint8_t Send_Heart_Server(void);
+/* connect iot task function*/
+void Connect_Iot_Task(void* parameter);
 
 #ifdef __cplusplus
 }

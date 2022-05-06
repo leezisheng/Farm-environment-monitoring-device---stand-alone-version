@@ -37,3 +37,17 @@ mx_pig_v1.0\get_sensor_task.o: D:\Lee\MDK5\ARM\ARMCC\Bin\..\include\stdio.h
 mx_pig_v1.0\get_sensor_task.o: ..\Hardware\inc\ADC_Operation.h
 mx_pig_v1.0\get_sensor_task.o: ..\Hardware\inc\DTH11.h
 mx_pig_v1.0\get_sensor_task.o: ..\Hardware\inc\UART_Printf.h
+mx_pig_v1.0\get_sensor_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+mx_pig_v1.0\get_sensor_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+mx_pig_v1.0\get_sensor_task.o: ../Core/Inc/FreeRTOSConfig.h
+mx_pig_v1.0\get_sensor_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+mx_pig_v1.0\get_sensor_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+mx_pig_v1.0\get_sensor_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+mx_pig_v1.0\get_sensor_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3/portmacro.h
+mx_pig_v1.0\get_sensor_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+mx_pig_v1.0\get_sensor_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+mx_pig_v1.0\get_sensor_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+mx_pig_v1.0\get_sensor_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+mx_pig_v1.0\get_sensor_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
+mx_pig_v1.0\get_sensor_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
+mx_pig_v1.0\get_sensor_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h

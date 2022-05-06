@@ -68,7 +68,10 @@
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
 
-/* Select whether to use external modules : Used during program debugging */
+/* 
+	Select whether to use external modules : Used during program debugging 
+	Make sure there is no problem with the external circuit and components, all one
+*/
 #define USE_ESP8266 	1
 #define USE_OLED     	1
 #define USE_DTH11     	0
@@ -78,8 +81,11 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-extern __IO uint16_t   aADCxConvertedValues[ADCCONVERTEDVALUES_BUFFER_SIZE];
-extern uint8_t         ubSequenceCompleted;
+
+/* Whether the device is successfully connected to alibaba Cloud Iot platform: it is determined that 
+   the device is operated independently and the data is displayed locally; Or upload the data to the cloud 
+*/
+uint8_t is_connect_iot = 0;
 
 /* USER CODE END PV */
 
@@ -132,12 +138,13 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   
+  /*-----------------------Initialization of chip peripherals and basic functions - start--------------------------*/
+  
   /* Operations related to peripherals after initialization  */
   ret = BSP_Init();
   if(ret!=(int32_t)OPERATION_SUCCESS)
   {
 	  Display_Operation_Status("BSP init :" ,ret);
-	  Error_Handler();
   }
   Display_Operation_Status("BSP init :" ,ret);
   HAL_Delay(1000);
@@ -145,34 +152,23 @@ int main(void)
  
   OLED_ShowStr(20, 0, "start connect iot", 1);
   OLED_ShowStr(2, 2, "please wait 10s", 1);
-  /*
-  AT+RST
-  AT+RESTORE
-  AT+CWMODE=1
-  AT+CWJAP="CMCC-y36J","DE3e5SLL"
-  AT+CIPSNTPCFG=1,8,"cn.ntp.org.cn","ntp.sjtu.edu.cn","us.pool.ntp.org"
-  AT+MQTTUSERCFG=0,1,"NULL","test_0&h5fb4XQhOoD","B210DD9F749288AE7F8A485F0ABA0C0C05677A91",0,0,""
-  AT+MQTTCLIENTID=0,"123456|securemode=3\,signmethod=hmacsha1|"
-  AT+MQTTCONN=0,"h5fb4XQhOoD.iot-as-mqtt.cn-shanghai.aliyuncs.com",1883,1
-  AT+MQTTSUB=0,"/sys/h5fb4XQhOoD/test_0/thing/service/property/set",1
-  AT+MQTTPUB=0,"/sys/h5fb4XQhOoD/test_0/thing/event/property/post","{\"method\":\"thing.event.property.post\",\"id\":\"0000000001\"\,\"params\":{\"co\":2.0},\"version\":\"1.0.0\"}",1,0
-  */
+
   ret = Connct_aliyun_iot();
   if(ret!=(int32_t)OPERATION_SUCCESS)
   {
 	  Display_Operation_Status("Connect iot platform :" ,ret);
-	  Error_Handler();
   }
+  /* If the connection to the cloud platform is successful, start the online mode */
+  if(ret==(int32_t)OPERATION_SUCCESS)is_connect_iot = 1;
+ 
   Display_Operation_Status("Connect iot platform :" ,ret);
   HAL_Delay(1000);
   OLED_CLS();
   
-  
-  while(1)
-  {
-	  UploadData_To_Server();
-	  HAL_Delay(3000);
-  }
+  OLED_ShowStr(2, 2, "Start single-machine mode", 1);
+  HAL_Delay(1000);
+  OLED_CLS();
+  /*-----------------------Initialization of chip peripherals and basic functions - finish--------------------------*/
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
@@ -235,7 +231,6 @@ void SystemClock_Config(void)
     Error_Handler();
   }
 }
-
 /* USER CODE BEGIN 4 */
 
 /** 
@@ -281,32 +276,16 @@ int32_t BSP_Init(void)
 	#endif
 	
 	/* ----------------------------ADC1 Operation------------------------- */
-	/* Run the ADC calibration */  
-	if (HAL_ADCEx_Calibration_Start(&hadc1) != HAL_OK)
-	{
-		printf("ADC init fail\r\n");
-		OLED_ShowStr(5, 2, "ADC init fail", 1);
-		/* Calibration Error */
-		/* The program is abnormal, the LED lights flash, first for a short time and then for a long time, cycle   */
-		Error_Handler();
-		ret= (int32_t)OPERATION_ERROR;
-	}
 
 	/* Start ADC conversion on regular group with transfer by DMA */
-	if (HAL_ADC_Start_DMA(&hadc1,
-						  (uint32_t *)aADCxConvertedValues,
-                          ADCCONVERTEDVALUES_BUFFER_SIZE
-                         ) != HAL_OK)
+	if ((ADC_GetGas_Init()) != (uint8_t)OPERATION_SUCCESS)
 	{
-		printf("ADC DMA init fail\r\n");
-		OLED_ShowStr(5, 2, "ADC DMA init fail", 1);	
+		printf("ADC init fail\r\n");
+		OLED_ShowStr(5, 2, "ADC init fail", 1);	
 		/* Start Error */
 		Error_Handler();
 		ret= (int32_t)OPERATION_ERROR;
 	}
-
-	/* The flag bit reset of ADC1 collection is complete */
-	ubSequenceCompleted = RESET;
   
 	printf("ADC init success\r\n");
 	OLED_ShowStr(5, 2, "ADC init success", 1);

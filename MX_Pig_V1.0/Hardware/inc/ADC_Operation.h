@@ -166,16 +166,24 @@
   
 /* Extern Variable------------------------------------------------------------*/
 extern __IO uint16_t   aADCxConvertedValues[ADCCONVERTEDVALUES_BUFFER_SIZE];
-extern uint8_t         ubSequenceCompleted;
 
 /* Data structure declaration-------------------------------------------------*/
 
 /* Function declaration-------------------------------------------------------*/
-int32_t  ADC_Get_Gas(void);
+
+/* Initialize ADC related peripherals: ADC GPIO port and DMA channel */
+uint8_t  ADC_GetGas_Init(void);
+/* Obtain the voltage values collected by the four channels */
+uint8_t  ADC_Get_Gas(void);
+/* Returns the NH3 calculated gas concentration */
 float    ADC_Get_NH3(void);
+/* Returns the CO2 calculated gas concentration */
 float    ADC_Get_CO2(void);
+/* Returns the CO calculated gas concentration */
 float    ADC_Get_CO(void);
+/* Returns the H2S calculated gas concentration */
 float    ADC_Get_H2S(void);
+/* Returns the  calculated voltage */
 float    ADC_Get_Voltage(void);
 
 #ifdef __cplusplus

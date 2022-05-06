@@ -14,6 +14,10 @@
 #include "Get_Sensor_Task.h"
 
 #include <string.h>
+
+#include "cmsis_os.h"
+#include "FreeRTOS.h"
+#include "task.h"
 /* External function declaration----------------------------------------------*/
 
 /* Private macro definitions--------------------------------------------------*/
@@ -24,6 +28,15 @@
 Internat_Connect_Information_Struct Connect_Status_Stucrt = {0};
 /* Structure of sensor data to be reported */
 SENSOR_Information_Struct Upload_SensorDate_struct        = {0};
+/* 
+	Whether the device is successfully connected to alibaba Cloud Iot platform: it is determined that 
+	the device is operated independently and the data is displayed locally; Or upload the data to the cloud 
+*/
+extern uint8_t is_connect_iot;
+/* Handle to the gas sensor data message queue */
+extern QueueHandle_t Sensor_Data_Queue;
+/* Handle to the network status message queue */
+extern QueueHandle_t Internet_Status_Queue;
 
 /* Static function definition-------------------------------------------------*/
 
@@ -31,6 +44,19 @@ SENSOR_Information_Struct Upload_SensorDate_struct        = {0};
 
 /** 
 * @description: Use at-MQTT instructions to connect ali Cloud platform 
+
+  The AT instructions sent in sequence are as follows : 
+
+  AT+RST
+  AT+RESTORE
+  AT+CWMODE=1
+  AT+CWJAP="CMCC-y36J","DE3e5SLL"
+  AT+CIPSNTPCFG=1,8,"cn.ntp.org.cn","ntp.sjtu.edu.cn","us.pool.ntp.org"
+  AT+MQTTUSERCFG=0,1,"NULL","test_0&h5fb4XQhOoD","B210DD9F749288AE7F8A485F0ABA0C0C05677A91",0,0,""
+  AT+MQTTCLIENTID=0,"123456|securemode=3\,signmethod=hmacsha1|"
+  AT+MQTTCONN=0,"h5fb4XQhOoD.iot-as-mqtt.cn-shanghai.aliyuncs.com",1883,1
+  AT+MQTTSUB=0,"/sys/h5fb4XQhOoD/test_0/thing/service/property/set",1
+ 
 * @param  {void} 
 * @return {uint8_t } : if success,return (uint8_t)OPERATION_SUCCESS
 * @author: leeqingshui 
@@ -159,19 +185,6 @@ __weak uint8_t UploadData_To_Server(void)
 {
 	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
 	
-    char mqtt_message[256];
-	
-
-	
-	
-	/*example :
-	sprintf(mqtt_message,"{\"method\":\"thing.event.property.post\",
-						   \"id\":\"0000000001\",
-						   \"params\":{\"RoomTemp\":%.2f},
-	                       \"version\":\"1.0.0\"}",temp);
-	*/
-	
-	
 	
 	
 	return ret;
@@ -192,3 +205,38 @@ __weak uint8_t Send_Heart_Server(void)
 	return ret;
 }
 
+/** 
+* @description: connect iot task function
+* @param  {void*} 
+* @return {void } 
+* @author: leeqingshui 
+*/
+void Connect_Iot_Task(void* parameter)
+{
+	BaseType_t xReturn = pdPASS;
+	
+	while(1)
+	{
+        /* Sends network status data to the message queue */
+	    xReturn = xQueueSend(	Internet_Status_Queue, 
+								&Connect_Status_Stucrt,
+								500);       
+		/* Description Sending network status data succeeded */
+        if(pdPASS == xReturn)
+			printf("Description Sending network status data succeeded\r\n");
+		
+		/* Receiving sensor data */
+		xReturn = xQueuePeek( 	Sensor_Data_Queue,  
+							    &Upload_SensorDate_struct,     
+                                500); 
+		/* Receiving sensor data succeeded */
+		if(pdPASS == xReturn)
+			printf("Receiving sensor data succeeded\r\n");
+		
+		/* Update the data */
+		UploadData_To_Server();
+		
+		printf("connect iot task task Running\r\n");
+		vTaskDelay(5000);
+	}
+}

@@ -11,12 +11,24 @@
 #include "ADC_Operation.h"
 #include "DTH11.h"
 #include "UART_Printf.h"
+
+#include "cmsis_os.h"
+#include "FreeRTOS.h"
+#include "task.h"
 /* External function declaration----------------------------------------------*/
 
 /* Private macro definitions--------------------------------------------------*/
 
 /* Global variable------------------------------------------------------------*/
+
+/* A structure used to store sensor information */
 SENSOR_Information_Struct Sensor_Info_Struct = {0};
+/* Whether the device is successfully connected to alibaba Cloud Iot platform: it is determined that 
+   the device is operated independently and the data is displayed locally; Or upload the data to the cloud 
+*/
+extern uint8_t is_connect_iot;
+/* Handle to the gas sensor data message queue */
+extern QueueHandle_t Sensor_Data_Queue;
 
 /* Static function definition-------------------------------------------------*/
 
@@ -55,7 +67,33 @@ uint8_t Get_Sensor_Info(void)
 	return ret;
 }
 
-
+/** 
+* @description: get sensor data task function
+* @param  {void*} 
+* @return {void } 
+* @author: leeqingshui 
+*/
+void Get_Sensor_Task(void* parameter)
+{
+	BaseType_t xReturn = pdPASS;
+	
+	while(1)
+	{
+		/* Update the data */
+		Get_Sensor_Info();
+		
+		/* Sends sensor data to the message queue */
+	    xReturn = xQueueSend(	Sensor_Data_Queue, 
+								&Sensor_Info_Struct,
+								500);       
+		/* Sending sensor data succeeded. Procedure */
+        if(pdPASS == xReturn)
+			printf("Sending sensor data succeeded. Procedure\r\n");
+		
+		printf("get sensor data task Running\r\n");
+		vTaskDelay(3000);
+	}
+}
 
 
 

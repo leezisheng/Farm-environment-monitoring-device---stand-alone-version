@@ -39,6 +39,14 @@ typedef void*                   p_void;
 #define OPERATION_FALSE         0
 #define OPERATION_ERROR         255
 
+/* Data Stuct */
+typedef struct Data_Struct
+{
+    int  iValue; 
+    int iMeaning;
+}xData;
+
+
 #ifdef __cplusplus
 }
 #endif

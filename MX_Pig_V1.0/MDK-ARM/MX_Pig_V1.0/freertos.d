@@ -47,3 +47,7 @@ mx_pig_v1.0\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timer
 mx_pig_v1.0\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 mx_pig_v1.0\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 mx_pig_v1.0\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
+mx_pig_v1.0\freertos.o: ..\Task\inc\Display_Data_Task.h
+mx_pig_v1.0\freertos.o: ..\Task\inc\Connect_Iot_Task.h
+mx_pig_v1.0\freertos.o: ..\Task\inc\Connect_Iot_Task.h
+mx_pig_v1.0\freertos.o: ..\Task\inc\Get_Sensor_Task.h

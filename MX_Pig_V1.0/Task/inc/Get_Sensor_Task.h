@@ -39,7 +39,8 @@ typedef struct
 /* Function declaration-------------------------------------------------------*/
 /* Update the value of the sensor obtained */
 uint8_t Get_Sensor_Info(void);
-
+/* get sensor data task function */
+void Get_Sensor_Task(void* parameter);
 
 #ifdef __cplusplus
 }

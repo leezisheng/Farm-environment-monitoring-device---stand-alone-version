@@ -86,9 +86,45 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *AdcHandle)
 }
 
 /* Function definition--------------------------------------------------------*/
-int32_t ADC_Get_Gas(void)
+
+/** 
+* @description: Initialize ADC related peripherals: ADC GPIO port and DMA channel
+* @param  {void} 
+* @return {uint8_t } : if success,return (uint8_t)OPERATION_SUCCESS
+* @author: leeqingshui 
+*/
+uint8_t  ADC_GetGas_Init(void)
 {
-	int32_t ret= (int32_t)OPERATION_SUCCESS;
+	uint8_t ret= (uint8_t)OPERATION_SUCCESS;
+	
+    /* Run the ADC calibration */  
+	if (HAL_ADCEx_Calibration_Start(&hadc1) != HAL_OK)
+	{
+		return ret= (int32_t)OPERATION_ERROR;
+	}
+	
+    if (HAL_ADC_Start_DMA(&hadc1,
+						  (uint32_t *)aADCxConvertedValues,
+                          ADCCONVERTEDVALUES_BUFFER_SIZE
+                         ) != HAL_OK)
+	{
+		return ret= (int32_t)OPERATION_ERROR;
+	}
+	
+	/* The flag bit reset of ADC1 collection is complete */
+	ubSequenceCompleted = RESET;
+	return ret;
+}
+
+/** 
+* @description: Obtain the voltage values collected by the four channels
+* @param  {void} 
+* @return {uint8_t } : if success,return (uint8_t)OPERATION_SUCCESS
+* @author: leeqingshui 
+*/
+uint8_t ADC_Get_Gas(void)
+{
+	uint8_t ret= (uint8_t)OPERATION_SUCCESS;
 	
 	HAL_ADC_Start(&hadc1);
 	
@@ -99,7 +135,7 @@ int32_t ADC_Get_Gas(void)
     {
       /* ADC acquisition not completed, LED off */	
       HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin,GPIO_PIN_RESET);
-	  ret= (int32_t)OPERATION_FALSE;
+	  ret= (uint8_t)OPERATION_FALSE;
     }
 	
 	else
@@ -114,32 +150,62 @@ int32_t ADC_Get_Gas(void)
 	  uhVrefInt_mVolt               = COMPUTATION_DIGITAL_12BITS_TO_VOLTAGE(aADCxConvertedValues[4]);
 	
 	  ubSequenceCompleted = RESET;
-	  ret= (int32_t)OPERATION_SUCCESS;
+	  ret= (uint8_t)OPERATION_SUCCESS;
 	}
 	
 	return ret;
 }
 
+/** 
+* @description: Returns the calculated gas concentration 
+* @param  {void} 
+* @return {float } : calculated gas concentration 
+* @author: leeqingshui 
+*/
 float ADC_Get_NH3(void)
 {
 	return (float)(NH3_CONCENTRATION_CAL((float)uhADCChannel_4_ToDAC_mVolt/1000));
 }
 
+/** 
+* @description: Returns the calculated gas concentration 
+* @param  {void} 
+* @return {float } : calculated gas concentration 
+* @author: leeqingshui 
+*/
 float ADC_Get_CO2(void)
 {
 	return (float)(CO2_CONCENTRATION_CAL((float)uhADCChannel_6_ToDAC_mVolt/1000));
 }
 
+/** 
+* @description: Returns the calculated gas concentration 
+* @param  {void} 
+* @return {float } : calculated gas concentration 
+* @author: leeqingshui 
+*/
 float ADC_Get_CO(void)
 {
 	return (float)(CO_CONCENTRATION_CAL((float)uhADCChannel_7_ToDAC_mVolt/1000));
 }
 
+/** 
+* @description: Returns the calculated gas concentration 
+* @param  {void} 
+* @return {float } : calculated gas concentration 
+* @author: leeqingshui 
+*/
 float ADC_Get_H2S(void)
 {
 	return (float)(H2S_CONCENTRATION_CAL((float)uhADCChannel_8_ToDAC_mVolt/1000));
 }
 
+/** 
+* @description: Returns the calculated voltage
+* @param  {void} 
+* @return {float } : calculated voltage
+* @author: leeqingshui 
+*/
 float ADC_Get_Voltage(void)
 {
 	return (float)(uhVrefInt_mVolt)/1000+VOLTAGE_OFFSET;

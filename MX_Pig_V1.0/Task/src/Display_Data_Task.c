@@ -11,6 +11,10 @@
 #include "OLED.h"
 #include "UART_Printf.h"
 #include <math.h>
+
+#include "cmsis_os.h"
+#include "FreeRTOS.h"
+#include "task.h"
 /* External function declaration----------------------------------------------*/
 
 /* Private macro definitions--------------------------------------------------*/
@@ -19,7 +23,20 @@
 
 /* OLED display structure */
 Display_Struct OLED_Display_struct = {0};
+/*
+Because the DTH11 module is damaged, temperature and humidity data cannot be obtained. Therefore, 
+the simulation value of temperature and humidity data is generated using random number seeds
+*/
 static uint32_t rand = 100;
+/* Whether the device is successfully connected to alibaba Cloud Iot platform: it is determined that 
+   the device is operated independently and the data is displayed locally; Or upload the data to the cloud 
+*/
+extern uint8_t is_connect_iot;
+/* Handle to the gas sensor data message queue */
+extern QueueHandle_t Sensor_Data_Queue;
+/* Handle to the network status message queue */
+extern QueueHandle_t Internet_Status_Queue;
+
 /* Static function definition-------------------------------------------------*/
 
 /* Function definition--------------------------------------------------------*/
@@ -71,6 +88,12 @@ uint8_t Display_Data_Status(void)
 		  OLED_ShowStr(2,6,"Internet:",1)	&&
 	      OLED_ShowStr(2,7,"MQTT:",1);
 	
+	/*
+	Because the DTH11 module is damaged, temperature and humidity data cannot be obtained. Therefore, 
+	the simulation value of temperature and humidity data is generated using random number seeds
+	
+	If DTH11 is working, remove this code
+	*/
 	rand = rand+(uint32_t)20000*sin(0.2*rand)+(uint32_t)10000*cos(0.1*rand)+(uint32_t)10000*cos(rand*rand*0.1);
 	rand = (uint32_t)rand/4000;
 	if(rand>63355)rand=0;
@@ -97,4 +120,45 @@ uint8_t Display_Data_Status(void)
 	return ret;
 }
 
-
+/** 
+* @description: Displays the data task function
+* @param  {void*  } 
+* @return {void   } 
+* @author: leeqingshui 
+*/
+void Display_Data_Task(void* parameter)
+{
+	BaseType_t xReturn = pdPASS;
+	
+	while(1)
+	{
+	    /* Receiving sensor data */
+		xReturn = xQueuePeek( 	Sensor_Data_Queue,  
+							    &OLED_Display_struct.sensor_info_struct,     
+                                500); 
+		/* Receiving sensor data succeeded */
+		if(pdPASS == xReturn)
+			printf("Display task : Receiving sensor data succeeded\r\n");
+		
+		/* 
+		If the cloud platform is successfully connected, create a task to connect to the cloud platform. 
+		Otherwise, the standalone mode will be started and the data will be displayed on the local OLED screen
+		*/
+		if(is_connect_iot)
+		{
+	    /* Receiving network status */
+		xReturn = xQueuePeek( 	Internet_Status_Queue,  
+							    &OLED_Display_struct.internect_status_struct,     
+                                500); 
+		/* Receiving network status succeeded */
+		if(pdPASS == xReturn)
+			printf("Display task : network status succeeded\r\n");
+	    }
+		
+	    /* Update the data */
+		Display_Data_Status();
+		
+		printf("Displays the data task Running\r\n");
+	    vTaskDelay(1000);
+	}
+}

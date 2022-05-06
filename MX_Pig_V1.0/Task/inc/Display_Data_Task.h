@@ -32,6 +32,8 @@ typedef struct
 uint8_t Display_Operation_Status(uint8_t operation_name[] ,uint8_t status);
 /* OLED displays data information */
 uint8_t Display_Data_Status(void);
+/* OLED displays data task function */
+void Display_Data_Task(void* parameter);
 
 #ifdef __cplusplus
 }

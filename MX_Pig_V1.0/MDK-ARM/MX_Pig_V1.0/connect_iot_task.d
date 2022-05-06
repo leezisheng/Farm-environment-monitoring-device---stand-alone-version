@@ -40,3 +40,17 @@ mx_pig_v1.0\connect_iot_task.o: ..\Hardware\inc\UART_Printf.h
 mx_pig_v1.0\connect_iot_task.o: ..\Hardware\inc\OLED.h
 mx_pig_v1.0\connect_iot_task.o: ..\Task\inc\Get_Sensor_Task.h
 mx_pig_v1.0\connect_iot_task.o: D:\Lee\MDK5\ARM\ARMCC\Bin\..\include\string.h
+mx_pig_v1.0\connect_iot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+mx_pig_v1.0\connect_iot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+mx_pig_v1.0\connect_iot_task.o: ../Core/Inc/FreeRTOSConfig.h
+mx_pig_v1.0\connect_iot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+mx_pig_v1.0\connect_iot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+mx_pig_v1.0\connect_iot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+mx_pig_v1.0\connect_iot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3/portmacro.h
+mx_pig_v1.0\connect_iot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+mx_pig_v1.0\connect_iot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+mx_pig_v1.0\connect_iot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+mx_pig_v1.0\connect_iot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+mx_pig_v1.0\connect_iot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
+mx_pig_v1.0\connect_iot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
+mx_pig_v1.0\connect_iot_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
