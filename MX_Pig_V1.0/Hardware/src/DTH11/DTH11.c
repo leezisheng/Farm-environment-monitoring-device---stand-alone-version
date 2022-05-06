@@ -3,6 +3,14 @@
   * File Name          : DTH11.c
   * Description        : This file provides code for the configuration
   *                      of DTH11.
+  *
+  * DTH11 is single-bus communication. PC2 port is used to connect to DTH11_Data
+  *
+  * The functions in this file fall into two broad categories:
+  * Initialization function (internal functions used include: control port working mode function, DTH11 reset function, 
+  * DTH11 check return signal function, US level delay function)
+  *
+  * Read data function
   ******************************************************************************
  */
   

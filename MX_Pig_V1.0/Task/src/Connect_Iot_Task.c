@@ -2,7 +2,19 @@
   ******************************************************************************
   * File Name          : Connect_Iot.c
   * Description        : This file provides code for the configuration
-  *                      of Connect_Iot.
+  *                      of Connect_Iot task function
+  *
+  * Task Introduction:
+  *
+  * Connect and upload cloud platform task (Connect_Iot_Task) - Use ESP8266 to send the collected data to Ali Cloud Iot platform 
+  *	through at-MQTT instruction. The main peripherals used include: ESP8266 WIFI module, related driver code in eps8266. c/. H, 
+  *	uart_printf. c/. H two files, data from Sensor_Data_Queue message queue
+  *
+  * This section uses two global variables: the Connect_Status_Stucrt structure holds the networking state, and the Upload_SensorDate_struct 
+  * structure holds sensor information
+  *
+  *The functions of this file include: function to connect to the cloud platform, function to obtain network state, function to upload data, 
+  * and task function
   ******************************************************************************
  */
   

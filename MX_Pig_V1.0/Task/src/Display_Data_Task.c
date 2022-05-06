@@ -3,6 +3,17 @@
   * File Name          : Display_Data_Task.c
   * Description        : This file provides code for the configuration
   *                      of Display_Data_Task.
+  * Task Introduction:
+  *
+  * OLED display task (Display_Data_Task) : Display and update the collected sensor information and network connection data on 
+  *	the OLED screen. The data comes from two message queues, Internet_Status_Queue and Sensor_Data_Queue. The main peripherals used 
+  *	include: 1.3-inch OLED display, relevant driver layer file in OLed.c /.h
+  * 
+  * One structure is used here: OLED_Display_struct holds gas concentration data and network state data
+  *
+  * Data is mainly obtained from Sensor_Data_Queue and Internet_Status_Queue
+  *
+  * The functions of this file include: display data, display operation status, and task functions
   ******************************************************************************
  */
   

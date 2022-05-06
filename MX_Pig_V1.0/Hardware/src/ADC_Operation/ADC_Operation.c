@@ -4,6 +4,12 @@
   * Description        : This file provides code for the configuration
   *                      of GetGas by ADC1 .
   *
+  * The document includes:
+  * 1.AD1C collects the values of channels 4, 6, 7, 8 and internal reference voltage channels through scanning mode and 
+  * saves them in static internal variables
+  *
+  * 2. Convert the collected voltage value to the gas concentration data value (through the macro function in the header file)
+  *
   * ADC Parameter Settings :
   *
   * 	ADCs_Common_Settings:

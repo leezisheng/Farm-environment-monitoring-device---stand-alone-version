@@ -14,6 +14,21 @@
   * the License. You may obtain a copy of the License at:
   *                             www.st.com/SLA0044
   *
+  *	This part mainly includes four tasks:
+  *	
+  *	Sensor information collection task (Get_Sensor_Task) - Collects temperature and humidity information, ammonia concentration, 
+  *	hydrogen sulfide concentration, ozone concentration, and carbon monoxide concentration. The following peripherals are used: 
+  *	ADC.C /. H and DTH11. C /. H, and send data to Sensor_Data_Queue message queue
+  *	
+  * OLED display task (Display_Data_Task) : Display and update the collected sensor information and network connection data on 
+  *	the OLED screen. The data comes from two message queues, Internet_Status_Queue and Sensor_Data_Queue. The main peripherals used 
+  *	include: 1.3-inch OLED display, relevant driver layer file in OLed.c /.h
+  *	
+  *	Connect and upload cloud platform task (Connect_Iot_Task) - Use ESP8266 to send the collected data to Ali Cloud Iot platform 
+  *	through at-MQTT instruction. The main peripherals used include: ESP8266 WIFI module, related driver code in eps8266. c/. H, 
+  *	uart_printf. c/. H two files, data from Sensor_Data_Queue message queue
+  *
+  *	Start Task (AppTaskCreate) - Create task and message queue
   ******************************************************************************
   */
 /* USER CODE END Header */
@@ -23,7 +38,7 @@
 #include "task.h"
 #include "main.h"
 #include "cmsis_os.h"
-#include "queue.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 /* The basic function used by the task */
@@ -43,7 +58,6 @@
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
-
 /* USER CODE BEGIN PM */
 
 /* A message queue for receiving and sending sensor data */
@@ -84,7 +98,7 @@ QueueHandle_t Sensor_Data_Queue =NULL;
 QueueHandle_t Internet_Status_Queue =NULL;
 
 /* USER CODE END Variables */
-osThreadId Null_TaskHandle = NULL;
+osThreadId Null_TaskHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -101,6 +115,7 @@ extern void Get_Sensor_Task(void* parameter);
 extern void Display_Data_Task(void* parameter);
 
 /* USER CODE END FunctionPrototypes */
+
 void Null_Test_Task(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -111,34 +126,34 @@ void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
   * @retval None
   */
 void MX_FREERTOS_Init(void) {
-   /* USER CODE BEGIN Init */
+  /* USER CODE BEGIN Init */
   
    /* Define a create message return quantity */
    BaseType_t xReturn = pdPASS;
-   /* USER CODE END Init */
+  /* USER CODE END Init */
 
-   /* USER CODE BEGIN RTOS_MUTEX */
+  /* USER CODE BEGIN RTOS_MUTEX */
    /* add mutexes, ... */
-   /* USER CODE END RTOS_MUTEX */
+  /* USER CODE END RTOS_MUTEX */
 
-   /* USER CODE BEGIN RTOS_SEMAPHORES */
+  /* USER CODE BEGIN RTOS_SEMAPHORES */
    /* add semaphores, ... */
-   /* USER CODE END RTOS_SEMAPHORES */
+  /* USER CODE END RTOS_SEMAPHORES */
 
-   /* USER CODE BEGIN RTOS_TIMERS */
+  /* USER CODE BEGIN RTOS_TIMERS */
    /* start timers, add new ones, ... */
-   /* USER CODE END RTOS_TIMERS */
+  /* USER CODE END RTOS_TIMERS */
 
-   /* USER CODE BEGIN RTOS_QUEUES */
+  /* USER CODE BEGIN RTOS_QUEUES */
    /* add queues, ... */
-   /* USER CODE END RTOS_QUEUES */
+  /* USER CODE END RTOS_QUEUES */
 
-   /* Create the thread(s) */
-   /* definition and creation of Null_Task */
-	osThreadDef(Null_Task, Null_Test_Task, osPriorityLow, 0, 128);
-	Null_TaskHandle = osThreadCreate(osThread(Null_Task), NULL);
+  /* Create the thread(s) */
+  /* definition and creation of Null_Task */
+  osThreadDef(Null_Task, Null_Test_Task, osPriorityLow, 0, 128);
+  Null_TaskHandle = osThreadCreate(osThread(Null_Task), NULL);
 
-   /* USER CODE BEGIN RTOS_THREADS */
+  /* USER CODE BEGIN RTOS_THREADS */
   
    /* This task is automatically destroyed after it is created and other tasks are completed */
 	xReturn = xTaskCreate((TaskFunction_t )AppTaskCreate,  
@@ -151,7 +166,7 @@ void MX_FREERTOS_Init(void) {
     if(pdPASS == xReturn)
 		printf("create appcreate task success\r\n");
    /* add threads, ... */
-   /* USER CODE END RTOS_THREADS */
+  /* USER CODE END RTOS_THREADS */
 
 }
 

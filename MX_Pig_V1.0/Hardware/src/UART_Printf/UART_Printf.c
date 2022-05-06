@@ -3,6 +3,8 @@
   * File Name          : key.c
   * Description        : This file provides code for the configuration
   *                      of UART3_Printf.
+  *
+  * This file includes the printf function redirection for serial ports 3 and 1
   ******************************************************************************
  */
  
@@ -15,12 +17,9 @@
 #include <string.h>
 /* External function declaration----------------------------------------------*/
 
-
 /* Private macro definitions--------------------------------------------------*/
 
-
 /* Global variable------------------------------------------------------------*/
-
 
 /* Static function definition-------------------------------------------------*/
 static char *itoa( int value, char *string, int radix );

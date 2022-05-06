@@ -7,6 +7,11 @@
   *                      The voltage values of channel 4, channel 6, channel 7, channel 8, 
   *                      internal reference voltage and temperature sensor in ADC1 are obtained  
   *
+  * The header file defines some macro functions for data conversion and parameter adjustment
+  *
+  * Note that the parameters of the gas fitting curve and the deviation correction parameters need to be corrected according 
+  * to your own sensor
+  *
   * ADC Parameter Settings :
   *
   * 	ADCs_Common_Settings:
@@ -50,7 +55,6 @@
   *  NVIC configuration:										Preenmption Priority
   * 	DMA1 channel1 global interrupt 							6
   *		ADC1 and ADC2 global interrupts							5
-  *
   ***********************************************************************************************************************
   */
   

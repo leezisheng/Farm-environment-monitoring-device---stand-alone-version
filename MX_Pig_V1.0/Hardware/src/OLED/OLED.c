@@ -3,6 +3,7 @@
   * File Name          : Display.c
   * Description        : This file provides code for the configuration
   *                      Display information on an Oled
+  * This file includes: OLED initialization, reset, display character and number functions
   ******************************************************************************
  */
   

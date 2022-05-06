@@ -3,6 +3,14 @@
   * File Name          : Get_Sensor_Task.c
   * Description        : This file provides code for the configuration
   *                      of Get_Sensor_Task.
+  *
+  * Task Introduction:
+  *
+  *	Sensor information collection task (Get_Sensor_Task) - Collects temperature and humidity information, ammonia concentration, 
+  *	hydrogen sulfide concentration, ozone concentration, and carbon monoxide concentration. The following peripherals are used: 
+  *	ADC.C /. H and DTH11. C /. H, and send data to Sensor_Data_Queue message queue
+  * 
+  * The collected data is stored in the Sensor_Info_Struct structure
   ******************************************************************************
  */
   

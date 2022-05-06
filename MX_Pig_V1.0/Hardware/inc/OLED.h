@@ -3,9 +3,9 @@
   * File Name          : Display.h
   * Description        : This file contains all the functions prototypes for
   *                      Display information on Oled
-  *
-  *					     Reference blog links:
-  *                      https://blog.csdn.net/qq_47877230/article/details/109007571
+  *                      
+  * Use hardware IIC to connect OLED display screen
+  *	Reference blog links : https://blog.csdn.net/qq_47877230/article/details/109007571
   ******************************************************************************
   */
 /* Define to prevent recursive inclusion -------------------------------------*/

@@ -3,6 +3,10 @@
   * File Name          : key.c
   * Description        : This file provides code for the configuration
   *                      of STM32 connect esp8266 by uart1
+  * This file includes: ESP8266 initialization via RST pin, ESP8266 basic AT instruction send and receive function, ESP8266 AT-TCP 
+  * instruction send and receive function, ESP8266 AT-MQTT instruction send and receive function
+  *
+  * Note that the void USART1_IRQHandler() function in stm32f1xx_it.c has been modified to receive ESP8266 serial port data frames
   ******************************************************************************
  */
  /* Includes --------------------------------------------------------------------------------------------------------------------*/

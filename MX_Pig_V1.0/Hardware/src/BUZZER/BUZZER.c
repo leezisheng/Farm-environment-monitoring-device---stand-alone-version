@@ -3,6 +3,8 @@
   * File Name          : BUZZER.c
   * Description        : This file provides code for the configuration
   *                      of BUZZER.
+  *
+  *  This file includes functions to control the flicker of buzzer and LED2. Buzzer rain LED2 has a common GPIO port -PA5
   ******************************************************************************
  */
   
@@ -24,7 +26,7 @@
 /* Function definition--------------------------------------------------------*/
 
 /** 
-* @description: Buzzer function
+* @description: Buzzer function , Through delay and GPIO port flip
 * @param  {uint8_t} times 	  : The number of times the buzzer sounded
 * @param  {uint8_t} blinktime : LED2 Blink interval ,  in milliseconds
 * @return {void}
