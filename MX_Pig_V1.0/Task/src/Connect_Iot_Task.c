@@ -197,7 +197,11 @@ __weak uint8_t UploadData_To_Server(void)
 {
 	uint8_t ret = (uint8_t)OPERATION_SUCCESS;
 	
+	char message[256]={0};
 	
+	sprintf(message,"{\"method\":\"thing.event.property.post\",\"id\":\"0000000001\",\"params\":{\"mtemp\":%d},\"version\":\"1.0.0\"}",Upload_SensorDate_struct.Temp);
+	
+	ESP8266_MQTTPUB(PROPERTY_POST,message);
 	
 	return ret;
 }
